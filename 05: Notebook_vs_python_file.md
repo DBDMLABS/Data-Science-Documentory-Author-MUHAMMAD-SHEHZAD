@@ -36,3 +36,9 @@
 | **Enterprise Applications**          | Excellent                                                     | Usually supplementary                                                | 🏆 `.py`                        |
 | **Overall Professional Engineering** | **Excellent**                                                 | **Good as a complementary tool**                                     | 🏆 `.py`                        |
 
+### Author
+
+**MUHAMMAD SHEHZAD**\
+GitHub: https://github.com/dbdmlabs
+
+---
