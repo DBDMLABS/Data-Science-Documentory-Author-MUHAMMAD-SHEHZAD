@@ -1,5 +1,34 @@
 # MINICONDA 
----
+# Table of Content
+- [MINICONDA](#miniconda)
+- [Table of Content](#table-of-content)
+  - [WHAT IS MINICONDA?](#what-is-miniconda)
+    - [Remember:](#remember)
+  - [WHY DO WE USE CONDA?](#why-do-we-use-conda)
+  - [EXAMPLE OF PYTHON VERSION CONFLICT](#example-of-python-version-conflict)
+  - [EXAMPLE OF PACKAGE VERSION CONFLICT](#example-of-package-version-conflict)
+  - [SOLUTION — VIRTUAL ENVIRONMENTS](#solution--virtual-environments)
+    - [RESULT](#result)
+  - [EASY FORMULA:](#easy-formula)
+  - [MINICONDA WITH DIFFERENT TYPES OF PROJECTS](#miniconda-with-different-types-of-projects)
+  - [WHAT IS A CONDA ENVIRONMENT?](#what-is-a-conda-environment)
+  - [BASIC CONDA COMMANDS](#basic-conda-commands)
+    - [Check Conda installation](#check-conda-installation)
+    - [CREATE A NEW ENVIRONMENT](#create-a-new-environment)
+      - [Explanation:](#explanation)
+    - [ACTIVATE AN ENVIRONMENT](#activate-an-environment)
+    - [DEACTIVATE AN ENVIRONMENT](#deactivate-an-environment)
+    - [LIST ALL ENVIRONMENTS](#list-all-environments)
+    - [INSTALL PACKAGES](#install-packages)
+    - [REMOVE A PACKAGE](#remove-a-package)
+    - [LIST INSTALLED PACKAGES](#list-installed-packages)
+    - [UPDATE CONDA](#update-conda)
+    - [INSTALL JUPYTER](#install-jupyter)
+  - [COMPLETE DATA SCIENCE ENVIRONMENT](#complete-data-science-environment)
+  - [FINAL CONCEPT](#final-concept)
+    - [Author](#author)
+
+
 
 ## WHAT IS MINICONDA?
 
@@ -14,7 +43,7 @@ It is used to:
     - Manage Data Science, ML, DL and AI environments
 
 
-## Remember:
+### Remember:
 >  Miniconda  ≠  Virtual Environment
 
 > Miniconda provides Conda.
@@ -109,7 +138,7 @@ My PC
         └── Python + Packages
 ```
 
-##  RESULT
+###  RESULT
 ```bash
 My PC
 │
@@ -135,15 +164,12 @@ My PC
 
 
 ## EASY FORMULA:
-
-    Folder = Project files
----
-    Virtual Environment = Python + Packages
----
-    Conda = Environment + Package Manager
----
-    Miniconda = Lightweight Conda Distribution
-
+```bash
+Folder = Project files
+Virtual Environment = Python + Packages
+Conda = Environment + Package Manager
+Miniconda = Lightweight Conda Distribution
+```
 
 ## MINICONDA WITH DIFFERENT TYPES OF PROJECTS
 
@@ -215,24 +241,11 @@ AI Agent Environment
     conda create -n datascience python=3.12
 
 
-### Explanation:
-
-    conda create
-         ↓
-    Create a new environment
----
-     -n
-        ↓
-    Name the environment
----
-    datascience
-         ↓
-    Environment name
----
-    python=3.12
-      ↓
-    Python version
----
+#### Explanation:
+> `conda create`---Create a new environment\
+> `-n`---Name the environment\
+> `datascience`---Environment name\
+> `python=3.12`---Python version
 
 ### ACTIVATE AN ENVIRONMENT
 
@@ -250,13 +263,12 @@ AI Agent Environment
 
 > This leaves the currently active environment.
 
-
 ### LIST ALL ENVIRONMENTS
 
     conda env list
 
 
-# Example:
+Example:
 
 > base\
 > datascience\
@@ -276,7 +288,7 @@ AI Agent Environment
 > the currently active environment.
 
 
-# 16. REMOVE A PACKAGE
+### REMOVE A PACKAGE
 
     conda remove pandas
 > This removes pandas from the current environment.
@@ -324,6 +336,16 @@ conda install jupyter
 jupyter notebook
 
 ```
----
-Author: **MUHAMMAD SHEHZAD**\
+## FINAL CONCEPT
+
+> Miniconda helps us create and manage isolated
+environments so that different projects can use
+different Python versions and packages without
+interfering with each other.
+
+### Author
+
+**MUHAMMAD SHEHZAD**\
 GitHub: https://github.com/dbdmlabs
+
+---
