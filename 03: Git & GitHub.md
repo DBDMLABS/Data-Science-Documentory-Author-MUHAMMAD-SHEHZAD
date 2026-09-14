@@ -840,13 +840,12 @@ git fetch origin
 > View remote branches:
 ```bash
 git branch -r
-
+```
 Example:
 
-origin/main
-origin/feature-database
-origin/fix-homepage
-```
+> origin/main\
+> origin/feature-database\
+> origin/fix-homepage
 
 ### Create Local Branch from Remote Branch
 ```bash
@@ -993,27 +992,19 @@ git rebase main
 
 > Create tag:
 
-```bash
-git tag v1.0
-```
+    git tag v1.0
 
 > List tags:
 
-```bash
-git tag
-```
+    git tag
 
 > Push tag:
 
-```bash
-git push origin v1.0
-```
+    git push origin v1.0
 
 > Push all tags:
 
-```bash
-git push origin --tags
-```
+    git push origin --tags
 ---
 
 ## Basic GitHub Workflow
