@@ -106,3 +106,210 @@ isinstance(x, int)   # True
 issubclass(int, object) # True - everything inherits from object
 ```
 ---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+## Numbers and Math in Python
+### Mathematics
+#### Basic Mathematical Operators
+| Operator | Meaning        |   Example |     Result |
+| -------- | -------------- | --------: | ---------: |
+| `+`      | Addition       |  `10 + 3` |       `13` |
+| `-`      | Subtraction    |  `10 - 3` |        `7` |
+| `*`      | Multiplication |  `10 * 3` |       `30` |
+| `/`      | Division       |  `10 / 3` | `3.333...` |
+| `//`     | Floor division | `10 // 3` |        `3` |
+| `%`      | Remainder      |  `10 % 3` |        `1` |
+| `**`     | Power          | `10 ** 3` |     `1000` |
+
+> Floor division gives the result rounded down toward negative infinity.\
+> e.g: floor of `-2.5` is `-3` and floor of `+2.5` is `+2`
+
+#### Order of Operations
+> `PEMDAS` or `DOSMAS`
+> Parentheses → Powers → Multiplication/Division → Addition/Subtraction
+
+#### Assignment Operators
+| Operator | Meaning        |   Example |     Result |
+| -------- | -------------- | --------: | ---------: |
+| `=`      | Assignment     |     `x=2` |         `2` |
+| `+=`     | add and assign |    `x+=2` |       `x+2` |
+| `-=`     | subtract and assign|`x-=2` |       `x-2` |
+| `*=`     | multiply and assign|`x*=2` |       `x*2` |
+| `/=`     | divide and assign|  `x/=2` |       `x/2` |
+| `//=`    |floor divide and assign|`x//=2`|   `x//2` |
+| `%=`     | modoulus and assign | `x%=2` |     `x%2` |
+| `**=`    | Power and assign| `x**=2`  |  `x power 2`|
+
+#### Comparing Operator
+| Operator | Meaning        |
+| -------- | -------------- |
+|`==`      |   Equal to      |
+|`!=`      |   Not equal     |
+|`>`       |     greater than|
+|`<`       |      less than  |
+|`>=`      | greater than or equal to|
+|`<=`      | less than or equal to|
+
+#### Type conversion
+```bash
+print(int(32.5)) #32
+print(float(3))  #3.0
+
+or
+x =23
+float(x)        #23.0
+
+print(complex(3))   # 3+0j
+print(complex(x))   #23+0j
+
+```
+
+#### Taking Input
+```bash
+age = input("Enter your age")
+print(type(age))
+
+# add 2 number taking input
+x = int(input("Enter Your age"))
+y = int(input("Enter your DS experience age))
+sum = x+y
+
+# calculate average
+average = (x+y)/2
+```
+#### Usefull Built-in Mathematical Func.
+
+| Function | Purpose    |
+| -------- | ---------- |
+|`abs()`   | absolute value |
+|`round()` | round a number|
+|`pow()`   | power of number|
+|`divmod()`  | Return Quotient and remainder|
+|`min()`     | find minimum|
+|`max()`     | find maximum|
+|`sum()`     | adding numbers|
+
+> absolute is mod `|-4| = 4`\
+> rounding to negative decimals\
+> python uses"round half to even"\
+> This is called bankers rounding\
+> `pow(2,3)` means `2 power 3 = 2*2*2 =8`
+```bash
+print(round(2.5))  # 2
+print(round(3.5))  # 4
+
+# Modular Exponention
+print(pow(2,10,1000)) 
+# 2 powe 10 mod 1000 =1024 mod 1000=24
+
+# Quotient and Remainder divmod()
+result(17,5)
+print(result)  # (3,2)
+```
+
+#### python Math Module
+```bash
+import math
+
+# Square Root
+print(math.squrt(16)) # 4
+print(math.squrt(2))  # 1.4142...
+# calculate hypotenuse
+a=2 
+b=3
+c= math.squr(a**2 + b**2)
+
+# constants
+print(math.pi)
+print(math.e)
+
+circle area = math.pi * r**2
+circumference = 2 * math.pi * r**2
+
+# Ceiling and floor
+Ceiling Returns smallest int >= the number
+print(math.ceil(3.2)) # 4
+print(math.ceil(-3.2)) # -3
+
+floor returns greatest int <= the number
+print(math.floor(3.2)) # 3
+print(math.floor(-3.2)) # -4
+
+# Factorial
+factorial of non negative no. `n` is:
+n! = n*(n-1)(n-2).........
+print(math.factorial(5)) #120
+
+# GCD and LCM
+greatest common divisor and least common multiple
+print(math.gcd(38,78))
+print(math.lcm(4.6))
+
+# Exponential func.
+print(math.exp(2))
+
+# Natural Logrithm
+print(log(math.e))
+print(math.log(100))
+
+# Logarithm with base
+print(math.log(100,10))
+
+# Base 2 Logarithm
+print(math.log2(1000))
+
+# Base 10 Logarithm
+print(math.log10(1000))
+```
+
+#### Trignometric Functions
+| Function | Purpose    |
+| -------- | ---------- |
+|`math.sin()`| sine|
+|`math.cos()`| cosine|
+|`math.tan()`| tangent|
+|`math.asin()`| inverse of sine|
+|`math.acos()`| inverse of cosine|
+|`math.atan()`| inverse of tangent|
+
+#### Python math module par 2
+```bash
+# convert degree to radian
+angle_degree = 90
+angle_radians=
+math.radians(angle_degree)
+print(angle_radians) #1.57
+angle_radians = math.pi/2
+
+# Examples
+math.radians(90)
+math.degrees(90)
+math.sin(30)
+
+# math.atan2
+# atan2(y,x) 
+calculate angle of a point from + x-axis  while correctly handling quadrents.
+x=1
+y=1
+angle = math.atan2(y,x)
+
+p13
