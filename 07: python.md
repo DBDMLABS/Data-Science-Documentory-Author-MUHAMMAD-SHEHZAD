@@ -159,54 +159,68 @@ permissions |= write
 
 ### Strings
 
+#### Creating strings
 ```bash
-# Creating strings
 name = "Python"
-
-# Indexing
+```
+#### Indexing
+```bash
 print(name[0])
-
-# Slicing
+```
+#### Slicing
+```bash
 print(name[1:4])
-
-# Length
+```
+#### Length
+```bash
 print(len(name))
-
-# Concatenation
+```
+#### Concatenation
+```bash
 print("Hello " + name)
-
-# Repetition
+```
+#### Repetition
+```bash
 print("Hi " * 3)
-
-# Remove whitespace
+```
+#### Remove whitespace
+```bash
 clean_text = text.strip()
-
-# Case conversion
+```
+#### Case conversion
+```bash
 print(clean_text.upper())
 print(clean_text.lower())
 print(clean_text.title())
-
-# Searching
+```
+#### Searching
+```bash
 print(name.find("t"))
 print(clean_text.find("Programming"))
-
-# Splitting
-print("a,b,c".split(","))
-
-# Joining
+```
+#### Splitting
+```bash
+print("abc".split(","))
+```
+#### Joining
+```bash
 print("-".join(["a", "b", "c"]))
-
-# Validation
+```
+#### Validation
+```bash
 print("123".isdigit())
-
-# Formatting
+```
+#### Formatting
+```bash
 age = 20
 print(f"I am {age} years old.")
-
-# Replacing
+```
+#### Replacing
+```bash
 print(clean_text.replace("Python", "Java"))
-
-# Reverse
+```
+#### Reverse
+```bash
 print(name[::-1])
 ```
 
@@ -232,7 +246,7 @@ print(name[::-1])
 > e.g: floor of `-2.5` is `-3` and floor of `+2.5` is `+2`
 
 #### Order of Operations
-> `PEMDAS` or `DOSMAS`
+> `PEMDAS` or `BODMAS`\
 > Parentheses → Powers → Multiplication/Division → Addition/Subtraction
 
 #### Assignment Operators
@@ -281,10 +295,7 @@ x = int(input("Enter Your age"))
 y = int(input("Enter your DS experience age))
 sum = x+y
 ```
-##### calculate average
-```bash
-average = (x+y)/2
-```
+
 #### Usefull Built-in Mathematical Func.
 
 | Function | Purpose    |
@@ -386,6 +397,7 @@ print(math.log(100))
 print(math.log(100,10))
 ```
 ##### Base 2 Logarithm
+```bash
 print(math.log2(1000))
 ```
 ##### Base 10 Logarithm
@@ -442,7 +454,7 @@ if math.inclose(a,0.3):
     print("apprximately equal")
 ```
 
-# using tolerance
+#### using tolerance
 ```bash
 ## rel_tol: Relative tolerance.
 print(math.isclose(1.000001, 1.000002, rel_tol=1e-5))
@@ -506,46 +518,50 @@ print(random.uniform(1, 10)) # random float b/w 1 and 10
 ```
 #### Random choice
 ```bash
-# Random choice
 colors = ["red", "green", "blue"]
 print(random.choice(colors))
-
-# Random Sample
+```
+#### Random Sample
+```bash
 numbers = [1, 2, 3, 4, 5]
 print(random.sample(numbers, 2))
-
-# Random seed
+```
+#### Random seed
+```bash
 random.seed(10)
 print(random.randint(1, 100))
-print(random.randint(1, 100))
+print(random.randfloat(1, 100))
 ```
 ### Statistics
     import statistics
-#### Basic statistics
+#### mean
 ```bash
-# mean
 numbers = [10, 20, 30, 40, 50]
 print(statistics.mean(numbers))
-
-# mode
+```
+#### mode
+```bash
 print(statistics.mode(numbers))
-
-# median
+```
+#### median
+```bash
 print(statistics.median(numbers))
-
-# standart deviation
+```
+#### standart deviation
+```bash
 print(statistics.stdev(numbers))
-
-# population and standard deviation
+```
+#### population and standard deviation
+```bash
 print(statistics.pstdev(numbers))
 ```
-### Bitwise Operations on Integers
+#### Bitwise Operations on Integers
 > Bitwise operators work on the binary representation of integers.
 ```bash
 | Operator | Name        |
 | -------- | ----------- |
 | `&`      | AND         |   
-| `|`       | OR         |
+| `|`      | OR          |
 | `^`      | XOR         |  
 | `~`      | NOT         |  
 | `<<`     | Left shift  |  
@@ -559,8 +575,32 @@ b = 3
 print(a & b)
 print(a | b)
 print(a ^ b)
+
+age = 25
+has_id = True
+print(age >= 18 and has_id) # True
 ```
-#### Assignment 
+
+| A     | B     | A and B |
+| ----- | ----- | ------- |
+| True  | True  | True    |
+| True  | False | False   |
+| False | True  | False   |
+| False | False | False   |
+
+> In python these values or treated as falsy values
+```bash
+False
+None
+0
+0.0
+""
+[]
+()
+{}
+set()
+```
+### Assignment 
 > solve following by taking input using input command
 ```bash
 # Calculate are of rectangle
@@ -621,3 +661,479 @@ or
 print("Age: " + str(20))
 ```
 
+
+## Controll Flow
+> Control flow means the order in which Python executes statements in a program.
+
+> By default, Python executes code from top to bottom:
+
+### Control-flow statements allow us to:
+
+> Make decisions\
+> Repeat code\
+> Skip specific statements\
+> Stop loops\
+> Handle different execution paths
+
+### Controll Flow Structure
+```bash
+Control Flow
+│
+├── Conditional Statements
+│   ├── if
+│   ├── if-else
+│   ├── if-elif-else
+│   └── Nested if
+│
+├── Looping Statements
+│   ├── for loop
+│   ├── while loop
+│   └── Nested loops
+│
+├── Loop Control Statements
+│   ├── break
+│   ├── continue
+│   └── pass
+│
+└── Other Control-Flow Features
+    ├── match-case
+    ├── Exception handling
+    └── Conditional expressions
+```
+#### Conditional Statements
+##### If statement
+```bash
+if condition:
+    statement
+
+# E.g: 
+if age >= 18:
+    print("You are an adult")
+```
+##### If else statement
+```bash
+if condition:
+    statement_if_condition_true
+else
+    statement_if_conditon_false
+# e.g:
+if number % 2 == 0:
+    print("Even number")
+else:
+    print("Odd number")
+```
+##### If-elif-else statement
+```bash
+if condition1:
+    statement1
+elif condition2:
+    statement2
+elif condition3:
+    statement3
+else
+    default_statement
+
+# e.g:
+if marks >= 80:
+    grade = "A+"
+elif marks >= 70:
+    grade = "A"
+elif marks >= 60:
+    grade = "B"
+elif marks >= 50:
+    grade = "C"
+elif marks >= 40:
+    grade = "D"
+else:
+    grade = "F"
+
+print(grade)
+
+# If the first condition is true, its block runs.
+# The remaining conditions are skipped.
+# If none is true, the else block runs.
+```
+##### Nested if statement
+An if statement inside another if statement is called a nested if.
+```bash
+if condition1:
+    if condition2:
+        statement_true
+    else:
+        statement_false
+else:
+    statement2
+
+
+# e.g: 
+age = 25
+has_license = True
+if age >= 18:
+    if has_license:
+        print("You can drive")
+    else:
+        print("You need a license")
+else:
+    print("You are underage")
+
+
+# Better Alternative
+if age >= 18 and has_license:
+    print("You can drive")
+else:
+    print("You cannot drive")
+
+
+# Multiple conditions
+age = 22
+income = 50000
+if age >= 18 and income >= 30000:
+    print("Eligible")
+else:
+    print("Not eligible")
+
+# or
+day = "Friday"
+if day == "Friday" or day == "Saturday":
+    print("Weekend is near")
+
+
+```
+##### Conditional Expression
+```bash
+# A conditional expression is a short form of if-else.
+value_if_true if condition else value_if_false
+# e.g:
+status = "Adult" if age >= 18 else "Minor"
+```
+
+#### LOOPS
+##### For Loop
+A for loop repeats a block of code for each item in an iterable.
+
+An iterable can be:
+```
+String
+List
+Tuple
+Set
+Dictionary
+Range
+File
+Other iterable objects
+```
+```bash
+# Syntax
+for variable in iterable:
+    statement
+
+# e.g:
+for number in [1, 2, 3, 4, 5]:
+    print(number)
+
+or
+for character in "Python":
+    print(character)
+```
+##### Range Function
+A range func is commonly used with for loop
+```bash
+# One Argument
+range(stop)
+
+for i in range(5):
+    print(i)
+
+# Two argument
+range(start, stop)
+
+# three argument
+range(start, stop, step)
+
+# Decreasing Range
+for i in range(10, 0, -1):
+    print(i)
+
+# for loop with else condition
+for i in range(5):
+    print(i)
+else:
+    print("Loop completed")
+```
+
+
+#### While Loop
+A while loop repeats code as long as a condition is true.
+```bash
+while condition:
+    statement
+
+# e.g:
+count = 1
+
+while count <= 5:
+    print(count)
+    count += 1
+
+# Check the condition.
+# If true, execute the body.
+# Update the loop variable.
+# Check the condition again.
+# Stop when the condition becomes false.
+
+# Avoid infinite loop
+Infinite loop never ends because its condition remains true
+
+# e.g:
+
+count = 1
+while count <= 5:
+    print(count)
+# While Loop with else cond.
+count = 1
+
+while count <= 3:
+    print(count)
+    count += 1
+else:
+    print("Loop completed")
+```
+##### Difference Between for and while
+| `for` Loop                                        | `while` Loop                        |
+| ------------------------------------------------- | ----------------------------------- |
+| Used to iterate over an iterable                  | Used while a condition is true      |
+| Usually used when repetitions are known           | Useful when repetitions are unknown |
+| Automatically moves to the next item              | Requires manual condition updates   |
+| Works naturally with strings, lists, ranges, etc. | Works with any Boolean condition    |
+| Less likely to become infinite                    | Can easily become infinite          |
+
+##### Break statement
+> break Statement immediately terminates the nearest loop.
+```bash
+for i in range(1, 10):
+    if i == 5:
+        break
+    print(i)
+
+# search for a numb
+numbers = [4, 8, 12, 16, 20]
+
+for number in numbers:
+    if number == 12:
+        print("Number found")
+        break
+```
+##### Continue Statement
+> The continue statement skips the remaining code in the current iteration and moves to the next iteration.
+```bash
+for i in range(1, 6):
+    if i == 3:
+        continue
+    print(i)
+
+# break stops the entire loop.
+# continue skips only the current iteration.
+```
+##### pass statement
+> The pass statement does nothing.
+
+> It is used as a placeholder when Python requires a statement but you do not want to execute anything yet.
+
+```bash
+if True:
+    pass
+
+# empty func
+def future_function():
+    pass
+
+# empty class
+def future_function():
+    pass
+
+# in a loop
+for i in range(5):
+    pass 
+```
+
+##### Nested Loop
+> A loop inside another loop is called a nested loop.
+```bash
+for i in range(1, 4):
+    for j in range(1, 4):
+        print(i, j)
+
+# Multiplication table
+number = 5
+for i in range(1, 11):
+    print(number, "x", i, "=", number * i)
+
+# Table
+for number in range(1, 6):
+    print(f"\nTable of {number}")
+
+    for i in range(1, 11):
+        print(f"{number} x {i} = {number * i}")
+```
+
+##### Nested Loop pattern
+```bash
+# Square:
+for i in range(4):
+    for j in range(4):
+        print("*", end=" ")
+    print()
+
+
+# Triangle:
+for i in range(1, 6):
+    for j in range(i):
+        print("*", end=" ")
+    print()
+
+# break in Nested Loops
+# break exits only the nearest/inner loop.
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            break
+
+
+# continue in Nested Loops
+# continue skips the current iteration of the nearest loop.
+for i in range(3):
+    for j in range(3):
+        if j == 1:
+            continue
+        print(i, j)
+```
+```bash
+# Looping Through Lists
+fruits = ["apple", "banana", "mango"]
+for fruit in fruits:
+    print(fruit)
+With index:
+for index, fruit in enumerate(fruits):
+    print(index, fruit)
+# enumerate() gives both index and value.
+
+
+# Looping Through Dictionaries
+#  Keys:
+for key in student:
+    print(key)
+
+
+# Values:
+for value in student.values():
+    print(value)
+
+Key + value:
+
+for key, value in student.items():
+    print(key, value)
+
+
+# Looping Through Tuples and Sets
+for item in my_tuple:
+    print(item)
+for item in my_set:
+    print(item)
+# A set has no guaranteed iteration order.
+
+
+# Looping Through Strings
+# Strings can be iterated character by character.
+for ch in "Python":
+    print(ch)
+```
+Useful for:
+
+> Counting characters\
+> Finding vowels\
+> Checking characters\
+> Building reversed strings
+##### Input-Based Control Flow
+```bash
+# Use input() with conditions to create interactive programs.
+age = int(input("Enter age: "))
+
+if age >= 18:
+    print("Adult")
+else:
+    print("Minor")
+#  input() returns a string, so convert it when necessary.
+
+
+# Input Validation with Loops
+# Use a loop to repeatedly ask until valid input is provided.
+while True:
+    age = int(input("Enter age: "))
+
+    if 1 <= age <= 100:
+        break
+
+    print("Invalid age")
+```
+##### match-case
+```bash
+# Used for matching a value against different patterns.
+match choice:
+    case 1:
+        print("Add")
+    case 2:
+        print("Subtract")
+    case _:
+        print("Invalid")
+_ = default case
+Available from Python 3.10+
+
+# match-case with Multiple Values
+match day:
+    case "Saturday" | "Sunday":
+        print("Weekend")
+    case _:
+        print("Weekday or invalid")
+# | means OR between patterns.
+
+# Exception Handling
+# Used to control what happens when an error occurs.
+try:
+    number = int(input("Enter number: "))
+except ValueError:
+    print("Invalid input")
+```
+> Main keywords:
+```
+try → code that may cause an error
+except → handles the error
+else → runs if no error occurs
+finally → runs regardless of error
+```
+##### assert
+```bash
+# Checks whether a condition is true.
+age = 20
+assert age >= 18
+
+If false, Python raises AssertionError.
+
+Mainly used for debugging and testing.
+```
+#### Control Flow Revision
+```bash
+# Concept---Purpose
+# if---Make a decision
+# elif---Check another condition
+# else---Default alternative
+# for---Iterate over an iterable
+# while---Repeat while condition is true
+# break---Exit loop
+# continue---Skip current iteration
+# pass---Do nothing/place-holder
+# Nested loop---Loop inside another loop
+# match-case---Pattern/value matching
+# try-except---Handle errors
+# assert---Test a condition
+# enumerate()---Get index + value
+```
