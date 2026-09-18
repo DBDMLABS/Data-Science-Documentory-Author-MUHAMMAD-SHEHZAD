@@ -329,7 +329,7 @@ result(17,5)
 print(result)  # (3,2)
 ```
 
-#### python Math Module
+##### Python Math Module
 ```bash
 import math
 ```
@@ -359,8 +359,7 @@ print(math.pi)
 print(math.e)
 
 circle area = math.pi * r**2
-circumference = 2 * math.pi * r**2
-```
+circumference = 2 * math.pi * r
 ##### Ceiling and floor
 ```bash
 Ceiling Returns smallest int >= the number
@@ -381,7 +380,7 @@ print(math.factorial(5)) #120
 ```bash
 greatest common divisor and least common multiple
 print(math.gcd(38,78))
-print(math.lcm(4.6))
+print(math.lcm(4,6))
 ```
 ##### Exponential func.
 ```bash
@@ -415,7 +414,7 @@ print(math.log10(1000))
 |`math.acos()`| inverse of cosine|
 |`math.atan()`| inverse of tangent|
 
-#### Python math module par 2
+##### Angles Conversion
 ```bash
 # convert degree to radian
 angle_degree = 90
@@ -455,12 +454,33 @@ if math.inclose(a,0.3):
 ```
 
 #### using tolerance
+> Tolerance = the maximum acceptable difference between two values.
 ```bash
 ## rel_tol: Relative tolerance.
+# Tolerance based on the size of the numbers.
 print(math.isclose(1.000001, 1.000002, rel_tol=1e-5))
+
 ## abs_tol: Absolute tolerance.
+# A fixed amount of difference that is acceptable.
 print(math.isclose(0.0000001, 0, abs_tol=1e-6))
+
+# Both together
+a = 0.000001
+b = 0.0000011
+
+print(math.isclose(
+    a,
+    b,
+    rel_tol=0.01,
+    abs_tol=0.0000001
+))
 ```
+| Parameter | Meaning            | Example |
+| --------- | ------------------ | ------- |
+| `a`       | First number       | `10.0`  |
+| `b`       | Second number      | `10.01` |
+| `rel_tol` | Relative tolerance | `0.001` |
+| `abs_tol` | Absolute tolerance | `0.01`  |
 
 #### Rounding and Formatting of a number
 ##### Rounding of number
@@ -862,7 +882,7 @@ else:
 ```
 
 
-#### While Loop
+##### While Loop
 A while loop repeats code as long as a condition is true.
 ```bash
 while condition:
@@ -1122,7 +1142,6 @@ Mainly used for debugging and testing.
 ```
 #### Control Flow Revision
 ```bash
-# Concept---Purpose
 # if---Make a decision
 # elif---Check another condition
 # else---Default alternative
