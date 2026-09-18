@@ -695,7 +695,7 @@ print("Age: " + str(20))
 > Stop loops\
 > Handle different execution paths
 
-### Controll Flow Structure
+#### Controll Flow Structure
 ```bash
 Control Flow
 │
@@ -1142,6 +1142,7 @@ Mainly used for debugging and testing.
 ```
 #### Control Flow Revision
 ```bash
+# Concept---Purpose
 # if---Make a decision
 # elif---Check another condition
 # else---Default alternative
@@ -1155,4 +1156,480 @@ Mainly used for debugging and testing.
 # try-except---Handle errors
 # assert---Test a condition
 # enumerate()---Get index + value
+```
+
+## Python Functions
+### Functions
+> A function is a reusable block of code that performs a specific task.
+
+> Instead of writing the same code again and again, we define it once and call it whenever needed.
+
+
+#### BASIC FUNCTION
+```bash
+def greet():
+    print("Hello!")
+
+greet()
+
+# Purpose:
+# Define code once and reuse it by calling the function.
+#
+# Important:
+# def = defines a function
+# () = parameters go here
+# Indentation = function body
+```
+
+#### FUNCTION WITH PARAMETER
+```bash
+def greet(name):
+    print("Hello", name)
+
+greet("Ali")
+
+# Purpose:
+# Pass data into a function.
+#
+# Important:
+# name = parameter
+# "Ali" = argument
+```
+
+#### MULTIPLE PARAMETERS
+```bash
+def add(a, b):
+    return a + b
+
+result = add(10, 20)
+print(result)
+
+# Purpose:
+# Function can accept multiple inputs.
+#
+# Important:
+# Arguments are matched to parameters by position
+# unless keyword arguments are used.
+```
+
+#### RETURN
+```bash
+def square(x):
+    return x * x
+
+answer = square(5)
+print(answer)
+
+# Purpose:
+# return sends a value back to the caller.
+#
+# IMPORTANT:
+# return also immediately ends the function.
+#
+# print()  -> displays something
+# return   -> gives a value back
+```
+
+#### DEFAULT PARAMETER
+```bash
+def greet(name="Guest"):
+    print("Hello", name)
+
+greet()
+greet("Ali")
+
+# Purpose:
+# Give a parameter a default value.
+#
+# If no argument is provided:
+# name = "Guest"
+```
+
+#### KEYWORD ARGUMENT
+```bash
+def student(name, age):
+    print(name, age)
+
+student(age=20, name="Ali")
+
+# Purpose:
+# Pass arguments using parameter names.
+#
+# Important:
+# Order doesn't matter for keyword arguments.
+```
+
+#### *args
+```bash
+def add(*numbers):
+    return sum(numbers)
+
+print(add(10, 20, 30))
+
+# Purpose:
+# Accept any number of positional arguments.
+#
+# IMPORTANT:
+# *args stores arguments in a TUPLE.
+```
+
+#### **kwargs
+```bash
+def student(**info):
+    print(info)
+
+student(name="Ali", age=20, city="Lahore")
+
+# Purpose:
+# Accept any number of keyword arguments.
+#
+# IMPORTANT:
+# **kwargs stores arguments in a DICTIONARY.
+```
+
+#### LOCAL VARIABLE
+```bash
+def test():
+    x = 10
+    print(x)
+
+test()
+
+# Purpose:
+# x exists only inside the function.
+#
+# IMPORTANT:
+# Local variables normally cannot be accessed
+# directly outside their function.
+```
+
+#### GLOBAL VARIABLE
+```bash
+x = 100
+
+def show():
+    print(x)
+
+show()
+
+# Purpose:
+# A variable outside the function can be read inside it.
+```
+
+#### global KEYWORD
+```bash
+x = 10
+
+def change():
+    global x
+    x = 20
+
+change()
+print(x)
+
+# Purpose:
+# Modify a global variable from inside a function.
+#
+# IMPORTANT:
+# Avoid unnecessary global variables.
+```
+
+#### LAMBDA FUNCTION
+```bash
+square = lambda x: x * x
+
+print(square(5))
+
+# Purpose:
+# Create a small anonymous function.
+#
+# Syntax:
+# lambda arguments: expression
+#
+# IMPORTANT:
+# Best for short/simple operations.
+```
+
+#### RECURSION
+```bash
+def countdown(n):
+
+    if n == 0:       # Base case: stops recursion
+        return
+
+    print(n)
+    countdown(n - 1)
+
+countdown(5)
+
+# Purpose:
+# A function calls itself.
+#
+# IMPORTANT:
+# Every recursive function needs a BASE CASE.
+# Otherwise recursion may continue until an error occurs.
+```
+
+#### DOCSTRING
+```bash
+def add(a, b):
+    """Return the sum of two numbers."""
+    return a + b
+
+print(add.__doc__)
+
+# Purpose:
+# Explain/document what a function does.
+#
+# IMPORTANT:
+# Usually written as the first statement in the function.
+```
+
+#### TYPE HINTS
+```bash
+def add(a: int, b: int) -> int:
+    return a + b
+
+# Purpose:
+# Communicate expected input and output types.
+#
+# IMPORTANT:
+# Type hints generally do NOT enforce types automatically.
+```
+
+#### FUNCTION + LOOP
+```bash
+def print_numbers(numbers):
+
+    for number in numbers:
+        print(number)
+
+print_numbers([10, 20, 30])
+
+# Purpose:
+# Functions can contain loops, conditions, etc.
+```
+
+#### FUNCTION QUICK REVISION
+```bash
+# def        -> define function
+# ()         -> parameters
+# argument   -> value passed to function
+# return     -> send result back
+# *args      -> multiple positional arguments -> tuple
+# **kwargs   -> multiple keyword arguments -> dictionary
+# lambda     -> small anonymous function
+# recursion  -> function calls itself
+# local      -> variable inside function
+# global     -> variable outside function
+# docstring  -> documentation
+# type hint  -> indicates expected types
+```
+
+
+### PYTHON COMPREHENSIONS
+> Purpose: Create collections using compact syntax
+
+
+#### LIST COMPREHENSION
+```bash
+numbers = [x for x in range(5)]
+
+print(numbers)
+
+# Output:
+# [0, 1, 2, 3, 4]
+#
+# Purpose:
+# Quickly create a LIST.
+#
+# Basic syntax:
+# [expression for item in iterable]
+```
+
+#### LIST COMPREHENSION WITH EXPRESSION
+```bash
+squares = [x * x for x in range(1, 6)]
+
+print(squares)
+
+# Output:
+# [1, 4, 9, 16, 25]
+#
+# Purpose:
+# Transform each item before adding it to the list.
+```
+
+#### LIST COMPREHENSION WITH IF
+```bash
+even = [x for x in range(10) if x % 2 == 0]
+
+print(even)
+
+# Output:
+# [0, 2, 4, 6, 8]
+#
+# Purpose:
+# Filter values.
+#
+# Syntax:
+# [expression for item in iterable if condition]
+```
+
+#### IF-ELSE IN LIST COMPREHENSION
+```bash
+result = [
+    "Even" if x % 2 == 0 else "Odd"
+    for x in range(5)
+]
+
+print(result)
+
+# Output:
+# ['Even', 'Odd', 'Even', 'Odd', 'Even']
+#
+# IMPORTANT:
+# With if-else:
+#
+# [value_if_true if condition else value_if_false
+#  for item in iterable]
+```
+
+#### STRING + LIST COMPREHENSION
+```bash
+word = "Python"
+
+letters = [ch.upper() for ch in word]
+
+print(letters)
+
+# Output:
+# ['P', 'Y', 'T', 'H', 'O', 'N']
+#
+# Purpose:
+# Iterate through characters of a string.
+```
+
+#### NESTED LIST COMPREHENSION
+```bash
+matrix = [[1, 2], [3, 4], [5, 6]]
+
+result = [x for row in matrix for x in row]
+
+print(result)
+
+# Output:
+# [1, 2, 3, 4, 5, 6]
+#
+# Purpose:
+# Flatten nested lists.
+#
+# Read it from left to right:
+#
+# for row in matrix
+#     for x in row
+#         add x
+```
+
+#### SET COMPREHENSION
+```bash
+numbers = [1, 2, 2, 3, 3, 4]
+
+squares = {x * x for x in numbers}
+
+print(squares)
+
+# Purpose:
+# Create a SET.
+#
+# IMPORTANT:
+# Sets automatically remove duplicates.
+#
+# Syntax:
+# {expression for item in iterable}
+```
+
+#### DICTIONARY COMPREHENSION
+```bash
+squares = {
+    x: x * x
+    for x in range(1, 6)
+}
+
+print(squares)
+
+# Output:
+# {1: 1, 2: 4, 3: 9, 4: 16, 5: 25}
+#
+# Purpose:
+# Create a dictionary quickly.
+#
+# Syntax:
+# {key: value for item in iterable}
+```
+
+#### DICTIONARY WITH CONDITION
+```bash
+even_squares = {
+    x: x * x
+    for x in range(10)
+    if x % 2 == 0
+}
+
+print(even_squares)
+
+# Purpose:
+# Create dictionary while filtering values.
+```
+
+#### GENERATOR EXPRESSION
+```bash
+numbers = (x * x for x in range(5))
+
+for number in numbers:
+    print(number)
+
+# Purpose:
+# Generate values when needed.
+#
+# IMPORTANT:
+# Generator does not create the whole collection at once.
+# This can save memory for large data.
+```
+
+#### NORMAL LOOP VS COMPREHENSION
+```bash
+# Normal:
+
+squares = []
+
+for x in range(5):
+    squares.append(x * x)
+
+
+# Comprehension:
+
+squares = [x * x for x in range(5)]
+
+# Both produce the same type of result.
+#
+# IMPORTANT:
+# Use comprehension when it makes the code clearer.
+# Don't make complicated comprehensions just to save lines.
+```
+
+#### COMPREHENSION QUICK REVISION
+```bash
+# []             -> List comprehension
+# {}             -> Set comprehension
+# {key: value}   -> Dictionary comprehension
+# ()             -> Generator expression
+#
+# if at END:
+# [x for x in data if condition]
+# -> FILTER
+#
+# if/else BEFORE for:
+# [A if condition else B for x in data]
+# -> CHOOSE VALUE
 ```
