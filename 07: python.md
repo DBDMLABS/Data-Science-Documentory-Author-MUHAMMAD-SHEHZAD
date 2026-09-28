@@ -1,6 +1,6 @@
 # Python For Data Science
 __Basic to Advance__\
-Including `Data Types`, `Variable`, `Math and stat`, `Conditions and Loops`, `Functions and Comprehensions`, `Classes and objects`, `Collections`, `Exceptions`, `File Handing` , `Imports and modules`, `Packages`, `Virtual Environments`, `Miscellaneous`
+Including `Data Types`, `Variable`, `Numbers and Math`, `Controll Flow`, `Functions and Comprehensions`, `Classes and objects`, `Collections`, `Exceptions`, `File Handing` , `Imports and modules`, `Pakages`, `Virtual Environments`, `Miscellaneous`
 
 
 - [Python For Data Science](#python-for-data-science)
@@ -195,8 +195,8 @@ Including `Data Types`, `Variable`, `Math and stat`, `Conditions and Loops`, `Fu
       - [FILE MODE QUICK REVISION](#file-mode-quick-revision)
   - [IMPORTS \& MODULES](#imports--modules)
   - [PACKAGES](#packages)
+  - [PIP](#pip)
   - [VIRTUAL ENVIRONMENT](#virtual-environment)
-  - [MISCELLANEOUS](#miscellaneous)
 
 ## Pyhton Fundamentals
 ### Introduction
@@ -2591,11 +2591,10 @@ __init__.py
 
 # Import from package
 from package.module import item
-
-```bash
+```
 
 ## PIP
-
+```bash
 # Install
 pip install package
 
@@ -2623,48 +2622,7 @@ python -m venv venv
 # Windows activation
 venv\Scripts\activate
 
-# macOS/Linux activation
-source venv/bin/activate
-
 # Exit environment
 deactivate
 ```
 
-## MISCELLANEOUS
-```bash
-# Check type
-type()
-
-# Object identity
-id()
-
-# Number of items
-len()
-
-# Available names/attributes
-dir()
-
-# Documentation
-help()
-
-# Index + value
-enumerate()
-
-# Combine iterables
-zip()
-
-# Return sorted list
-sorted()
-
-# Reverse iteration
-reversed()
-
-# At least one True
-any()
-
-# All True
-all()
-
-# Check condition/assumption
-assert
-```
