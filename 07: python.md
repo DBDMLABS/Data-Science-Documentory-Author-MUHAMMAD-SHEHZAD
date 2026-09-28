@@ -1,4 +1,163 @@
 # Python For Data Science
+- [Python For Data Science](#python-for-data-science)
+  - [Pyhton Fundamentals](#pyhton-fundamentals)
+    - [Introduction](#introduction)
+    - [Data Types](#data-types)
+      - [PYTHON DATA TYPES Map](#python-data-types-map)
+      - [Checking data type](#checking-data-type)
+      - [Data Type Conversion](#data-type-conversion)
+      - [variable of data type with instance func](#variable-of-data-type-with-instance-func)
+      - [variable of class with issubclass func.](#variable-of-class-with-issubclass-func)
+    - [Variables](#variables)
+      - [Dynamic Variables](#dynamic-variables)
+      - [Parallel \& Chained Assignments or Multiple Assignment](#parallel--chained-assignments-or-multiple-assignment)
+      - [Variable Naming](#variable-naming)
+      - [Reassignment](#reassignment)
+      - [Compund assignment](#compund-assignment)
+      - [Augmented assignment](#augmented-assignment)
+    - [Strings](#strings)
+      - [Creating strings](#creating-strings)
+      - [Indexing](#indexing)
+      - [Slicing](#slicing)
+      - [Length](#length)
+      - [Concatenation](#concatenation)
+      - [Repetition](#repetition)
+      - [Remove whitespace](#remove-whitespace)
+      - [Case conversion](#case-conversion)
+      - [Searching](#searching)
+      - [Splitting](#splitting)
+      - [Joining](#joining)
+      - [Validation](#validation)
+      - [Formatting](#formatting)
+      - [Replacing](#replacing)
+      - [Reverse](#reverse)
+    - [Numbers and Math in Python](#numbers-and-math-in-python)
+    - [Mathematics](#mathematics)
+      - [Basic Mathematical Operators](#basic-mathematical-operators)
+      - [Order of Operations](#order-of-operations)
+      - [Assignment Operators](#assignment-operators)
+      - [Comparing Operator](#comparing-operator)
+      - [Type conversion](#type-conversion)
+      - [Taking Input](#taking-input)
+      - [Usefull Built-in Mathematical Func.](#usefull-built-in-mathematical-func)
+        - [Modular Exponention](#modular-exponention)
+        - [Quotient and Remainder divmod()](#quotient-and-remainder-divmod)
+        - [Python Math Module](#python-math-module)
+        - [Square Root](#square-root)
+        - [calculate hypotenuse](#calculate-hypotenuse)
+        - [constants](#constants)
+        - [Factorial](#factorial)
+        - [GCD and LCM](#gcd-and-lcm)
+        - [Exponential func.](#exponential-func)
+        - [Natural Logrithm](#natural-logrithm)
+        - [Logarithm with base](#logarithm-with-base)
+        - [Base 2 Logarithm](#base-2-logarithm)
+        - [Base 10 Logarithm](#base-10-logarithm)
+      - [Trignometric Functions](#trignometric-functions)
+        - [Angles Conversion](#angles-conversion)
+        - [math.atan2](#mathatan2)
+      - [Floating Point Percision](#floating-point-percision)
+      - [using tolerance](#using-tolerance)
+      - [Rounding and Formatting of a number](#rounding-and-formatting-of-a-number)
+        - [Rounding of number](#rounding-of-number)
+        - [Formating with f-string](#formating-with-f-string)
+        - [Percentage formating](#percentage-formating)
+        - [comma formating](#comma-formating)
+        - [currency formating](#currency-formating)
+      - [Decimal numb and accurate calculations](#decimal-numb-and-accurate-calculations)
+      - [Fractions](#fractions)
+      - [Random numbers](#random-numbers)
+      - [Random choice](#random-choice)
+      - [Random Sample](#random-sample)
+      - [Random seed](#random-seed)
+    - [Statistics](#statistics)
+      - [mean](#mean)
+      - [mode](#mode)
+      - [median](#median)
+      - [standart deviation](#standart-deviation)
+      - [population and standard deviation](#population-and-standard-deviation)
+      - [Bitwise Operations on Integers](#bitwise-operations-on-integers)
+      - [Practice](#practice)
+  - [Controll Flow](#controll-flow)
+    - [Control-flow statements](#control-flow-statements)
+      - [Controll Flow Structure](#controll-flow-structure)
+      - [Conditional Statements](#conditional-statements)
+        - [If statement](#if-statement)
+        - [If else statement](#if-else-statement)
+        - [If-elif-else statement](#if-elif-else-statement)
+        - [Nested if statement](#nested-if-statement)
+        - [Conditional Expression](#conditional-expression)
+    - [LOOPS](#loops)
+      - [For Loop](#for-loop)
+      - [Range Function](#range-function)
+      - [While Loop](#while-loop)
+        - [Difference Between for and while](#difference-between-for-and-while)
+        - [Break statement](#break-statement)
+        - [Continue Statement](#continue-statement)
+        - [pass statement](#pass-statement)
+        - [Nested Loop](#nested-loop)
+        - [Nested Loop pattern](#nested-loop-pattern)
+        - [Input-Based Control Flow](#input-based-control-flow)
+        - [match-case](#match-case)
+        - [assert](#assert)
+      - [Control Flow Revision](#control-flow-revision)
+  - [Python Functions](#python-functions)
+    - [Functions](#functions)
+      - [BASIC FUNCTION](#basic-function)
+      - [FUNCTION WITH PARAMETER](#function-with-parameter)
+      - [MULTIPLE PARAMETERS](#multiple-parameters)
+      - [RETURN](#return)
+      - [DEFAULT PARAMETER](#default-parameter)
+      - [KEYWORD ARGUMENT](#keyword-argument)
+      - [\*args](#args)
+      - [\*\*kwargs](#kwargs)
+      - [LOCAL VARIABLE](#local-variable)
+      - [GLOBAL VARIABLE](#global-variable)
+      - [global KEYWORD](#global-keyword)
+      - [LAMBDA FUNCTION](#lambda-function)
+      - [RECURSION](#recursion)
+      - [DOCSTRING](#docstring)
+      - [TYPE HINTS](#type-hints)
+      - [FUNCTION + LOOP](#function--loop)
+      - [FUNCTION QUICK REVISION](#function-quick-revision)
+    - [COMPREHENSIONS](#comprehensions)
+      - [LIST COMPREHENSION](#list-comprehension)
+      - [LIST COMPREHENSION WITH EXPRESSION](#list-comprehension-with-expression)
+      - [LIST COMPREHENSION WITH IF](#list-comprehension-with-if)
+      - [IF-ELSE IN LIST COMPREHENSION](#if-else-in-list-comprehension)
+      - [STRING + LIST COMPREHENSION](#string--list-comprehension)
+      - [NESTED LIST COMPREHENSION](#nested-list-comprehension)
+      - [SET COMPREHENSION](#set-comprehension)
+      - [DICTIONARY COMPREHENSION](#dictionary-comprehension)
+      - [DICTIONARY WITH CONDITION](#dictionary-with-condition)
+      - [GENERATOR EXPRESSION](#generator-expression)
+      - [NORMAL LOOP VS COMPREHENSION](#normal-loop-vs-comprehension)
+      - [COMPREHENSION QUICK REVISION](#comprehension-quick-revision)
+  - [FILE HANDLING](#file-handling)
+    - [PYTHON FILE HANDLING](#python-file-handling)
+      - [OPEN A FILE](#open-a-file)
+      - [CLOSE A FILE](#close-a-file)
+      - [READ ENTIRE FILE](#read-entire-file)
+      - [READ ONE LINE](#read-one-line)
+      - [READ ALL LINES](#read-all-lines)
+      - [LOOP THROUGH FILE](#loop-through-file)
+      - [WRITE TO FILE](#write-to-file)
+      - [WRITE MULTIPLE LINES](#write-multiple-lines)
+      - [writelines()](#writelines)
+      - [APPEND](#append)
+      - [CREATE NEW FILE](#create-new-file)
+      - [FILE ENCODING](#file-encoding)
+      - [FILE POSITION — tell()](#file-position--tell)
+      - [FILE POSITION — seek()](#file-position--seek)
+      - [FILE ERROR HANDLING](#file-error-handling)
+      - [pathlib](#pathlib)
+      - [BINARY FILES](#binary-files)
+      - [COPY BINARY FILE](#copy-binary-file)
+      - [CSV FILE](#csv-file)
+      - [WRITE CSV](#write-csv)
+      - [JSON FILE](#json-file)
+      - [FILE MODE QUICK REVISION](#file-mode-quick-revision)
+
 ## Pyhton Fundamentals
 ### Introduction
 > Created by Guido Van Russam, Released in 1991.
@@ -620,7 +779,7 @@ None
 {}
 set()
 ```
-### Assignment 
+#### Practice 
 > solve following by taking input using input command
 ```bash
 # Calculate are of rectangle
@@ -687,7 +846,8 @@ print("Age: " + str(20))
 
 > By default, Python executes code from top to bottom:
 
-### Control-flow statements allow us to:
+### Control-flow statements
+> allow us to:
 
 > Make decisions\
 > Repeat code\
@@ -827,8 +987,8 @@ value_if_true if condition else value_if_false
 status = "Adult" if age >= 18 else "Minor"
 ```
 
-#### LOOPS
-##### For Loop
+### LOOPS
+#### For Loop
 A for loop repeats a block of code for each item in an iterable.
 
 An iterable can be:
@@ -855,7 +1015,7 @@ or
 for character in "Python":
     print(character)
 ```
-##### Range Function
+#### Range Function
 A range func is commonly used with for loop
 ```bash
 # One Argument
@@ -882,7 +1042,7 @@ else:
 ```
 
 
-##### While Loop
+#### While Loop
 A while loop repeats code as long as a condition is true.
 ```bash
 while condition:
@@ -1427,7 +1587,7 @@ print_numbers([10, 20, 30])
 ```
 
 
-### PYTHON COMPREHENSIONS
+### COMPREHENSIONS
 > Purpose: Create collections using compact syntax
 
 
@@ -1632,4 +1792,351 @@ squares = [x * x for x in range(5)]
 # if/else BEFORE for:
 # [A if condition else B for x in data]
 # -> CHOOSE VALUE
+```
+
+
+
+
+
+
+
+
+
+
+
+## FILE HANDLING
+### PYTHON FILE HANDLING
+> Purpose: Store and retrieve data permanently
+
+
+#### OPEN A FILE
+```bash
+file = open("data.txt", "r")
+
+# Purpose:
+# Open a file for reading.
+#
+# Syntax:
+# open(filename, mode)
+```
+
+#### CLOSE A FILE
+
+```bash
+file.close()
+
+# Purpose:
+# Close the file after using it.
+#
+# IMPORTANT:
+# Prefer using "with open()" so Python handles closing.
+```
+
+
+#### READ ENTIRE FILE
+```bash
+with open("data.txt", "r") as file:
+    data = file.read()
+
+print(data)
+
+# Purpose:
+# Read the complete file as one string.
+#
+# read() -> entire content
+```
+
+
+#### READ ONE LINE
+```bash
+with open("data.txt", "r") as file:
+    line = file.readline()
+
+print(line)
+
+# Purpose:
+# Read one line at a time.
+```
+
+#### READ ALL LINES
+```bash
+with open("data.txt", "r") as file:
+    lines = file.readlines()
+
+print(lines)
+
+# Purpose:
+# Read all lines into a LIST.
+#
+# IMPORTANT:
+# Newline characters (\n) may be included.
+```
+
+#### LOOP THROUGH FILE
+```bash
+with open("data.txt", "r") as file:
+
+    for line in file:
+        print(line)
+
+# Purpose:
+# Process a file line by line.
+#
+# Useful for large files because you can process
+# one line at a time.
+```
+
+
+#### WRITE TO FILE
+```bash
+with open("data.txt", "w") as file:
+    file.write("Hello Python")
+
+# Purpose:
+# Write data to a file.
+#
+# IMPORTANT:
+# "w" OVERWRITES existing content.
+```
+
+
+#### WRITE MULTIPLE LINES
+```bash
+with open("data.txt", "w") as file:
+    file.write("Python\n")
+    file.write("Java\n")
+    file.write("C++\n")
+
+# \n = new line
+```
+
+
+#### writelines()
+```bash
+lines = [
+    "Python\n",
+    "Java\n",
+    "C++\n"
+]
+
+with open("data.txt", "w") as file:
+    file.writelines(lines)
+
+# Purpose:
+# Write multiple strings.
+#
+# IMPORTANT:
+# writelines() does NOT automatically add \n.
+```
+
+#### APPEND
+```bash
+with open("data.txt", "a") as file:
+    file.write("\nNew data")
+
+# Purpose:
+# Add data to the END of the file.
+#
+# IMPORTANT:
+# "a" keeps old content.
+```
+
+#### CREATE NEW FILE
+```bash
+with open("new.txt", "x") as file:
+    file.write("Hello")
+
+# Purpose:
+# Create a new file.
+#
+# IMPORTANT:
+# "x" raises FileExistsError if file already exists.
+```
+
+
+#### FILE ENCODING
+```bash
+with open("data.txt", "r", encoding="utf-8") as file:
+    data = file.read()
+
+# Purpose:
+# Specify how text is encoded/decoded.
+#
+# IMPORTANT:
+# UTF-8 is a common choice for text files.
+```
+
+
+#### FILE POSITION — tell()
+```bash
+with open("data.txt", "r") as file:
+    print(file.tell())
+
+# Purpose:
+# Shows current position in the file.
+```
+
+
+#### FILE POSITION — seek()
+```bash
+with open("data.txt", "r") as file:
+
+    file.seek(0)
+
+    data = file.read()
+
+# Purpose:
+# Move to a particular position.
+#
+# seek(0) -> beginning of file
+```
+
+
+#### FILE ERROR HANDLING
+```bash
+try:
+
+    with open("missing.txt", "r") as file:
+        data = file.read()
+
+except FileNotFoundError:
+    print("File does not exist")
+
+# Purpose:
+# Prevent the program from crashing when the file
+# cannot be found.
+```
+
+
+#### pathlib
+```bash
+from pathlib import Path
+
+path = Path("data.txt")
+
+print(path.exists())
+
+# Purpose:
+# Modern and convenient way to work with paths/files.
+
+
+# Read:
+
+data = path.read_text(encoding="utf-8")
+
+# Write:
+
+path.write_text("Hello", encoding="utf-8")
+```
+
+
+#### BINARY FILES
+```bash
+with open("image.jpg", "rb") as file:
+    data = file.read()
+
+# rb = read binary
+#
+# Used for:
+# Images
+# Audio
+# Videos
+# PDFs
+# Other binary data
+```
+
+#### COPY BINARY FILE
+```bash
+with open("image.jpg", "rb") as source:
+    data = source.read()
+
+with open("copy.jpg", "wb") as destination:
+    destination.write(data)
+
+# Purpose:
+# Copy binary data from one file to another.
+```
+
+#### CSV FILE
+```bash
+import csv
+
+with open(
+    "students.csv",
+    "r",
+    newline="",
+    encoding="utf-8"
+) as file:
+
+    reader = csv.reader(file)
+
+    for row in reader:
+        print(row)
+
+# Purpose:
+# Work with CSV/tabular data.
+#
+# IMPORTANT:
+# Use csv module instead of manually splitting CSV
+# when proper CSV handling is needed.
+```
+
+#### WRITE CSV
+```bash
+import csv
+
+with open(
+    "students.csv",
+    "w",
+    newline="",
+    encoding="utf-8"
+) as file:
+
+    writer = csv.writer(file)
+
+    writer.writerow(["Name", "Age"])
+    writer.writerow(["Ali", 20])
+    writer.writerow(["Ahmed", 22])
+
+```
+#### JSON FILE
+```bash
+import json
+
+data = {
+    "name": "Ali",
+    "age": 20
+}
+
+with open("data.json", "w", encoding="utf-8") as file:
+    json.dump(data, file, indent=4)
+
+# Purpose:
+# Store structured Python data in JSON format.
+
+
+# Read JSON:
+
+with open("data.json", "r", encoding="utf-8") as file:
+    data = json.load(file)
+
+print(data)
+```
+
+#### FILE MODE QUICK REVISION
+```bash
+# "r"  -> READ
+# "w"  -> WRITE / OVERWRITE
+# "a"  -> APPEND
+# "x"  -> CREATE
+#
+# "rb" -> READ BINARY
+# "wb" -> WRITE BINARY
+#
+# IMPORTANT:
+#
+# r -> file normally must already exist
+# w -> creates file if needed, but overwrites existing data
+# a -> creates file if needed and adds to the end
+# x -> creates only if it doesn't already exist
 ```
