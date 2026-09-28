@@ -1,7 +1,6 @@
 # Python For Data Science
 - [Python For Data Science](#python-for-data-science)
   - [Pyhton Fundamentals](#pyhton-fundamentals)
-    - [Introduction](#introduction)
     - [Data Types](#data-types)
       - [PYTHON DATA TYPES Map](#python-data-types-map)
       - [Checking data type](#checking-data-type)
