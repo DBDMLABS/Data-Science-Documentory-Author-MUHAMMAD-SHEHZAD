@@ -119,6 +119,7 @@
       - [DOCSTRING](#docstring)
       - [TYPE HINTS](#type-hints)
       - [FUNCTION + LOOP](#function--loop)
+      - [Usefull buid in functions](#usefull-buid-in-functions)
       - [FUNCTION QUICK REVISION](#function-quick-revision)
     - [COMPREHENSIONS](#comprehensions)
       - [LIST COMPREHENSION](#list-comprehension)
@@ -133,6 +134,36 @@
       - [GENERATOR EXPRESSION](#generator-expression)
       - [NORMAL LOOP VS COMPREHENSION](#normal-loop-vs-comprehension)
       - [COMPREHENSION QUICK REVISION](#comprehension-quick-revision)
+  - [Classes and Objects](#classes-and-objects)
+    - [Python Classes](#python-classes)
+      - [CLASS](#class)
+      - [OBJECT](#object)
+      - [CONSTRUCTOR __init__()](#constructor-init)
+      - [self](#self)
+      - [ATTRIBUTE](#attribute)
+      - [METHOD](#method)
+      - [CLASS VARIABLE](#class-variable)
+      - [INHERITANCE](#inheritance)
+      - [METHOD OVERRIDING](#method-overriding)
+      - [super()](#super)
+      - [CLASS METHOD](#class-method)
+      - [STATIC METHOD](#static-method)
+  - [Collections](#collections)
+    - [Python Collections](#python-collections)
+      - [Lists](#lists)
+      - [Tupple](#tupple)
+      - [Set](#set)
+      - [Dictionary](#dictionary)
+  - [Exceptions](#exceptions)
+    - [EXCEPTION?](#exception)
+      - [try](#try)
+      - [except](#except)
+      - [try + except](#try--except)
+      - [else](#else)
+      - [finally](#finally)
+      - [as e](#as-e)
+      - [raise](#raise)
+      - [CUSTOM EXCEPTION](#custom-exception)
   - [FILE HANDLING](#file-handling)
     - [PYTHON FILE HANDLING](#python-file-handling)
       - [OPEN A FILE](#open-a-file)
@@ -1569,7 +1600,16 @@ print_numbers([10, 20, 30])
 # Purpose:
 # Functions can contain loops, conditions, etc.
 ```
-
+#### Usefull buid in functions
+```bash
+> callable() # Checks if an object can be called as a function
+> dir() # Lists attributes and methods
+> globals() # Get a dictionary of the current global symbol table
+> hash() # Get the hash value
+> id() # Get the unique identifier
+> locals() # Get a dictionary of the current local symbol table
+> repr() # Get a string representation for debugging
+```
 #### FUNCTION QUICK REVISION
 ```bash
 # def        -> define function
@@ -1793,14 +1833,388 @@ squares = [x * x for x in range(5)]
 # [A if condition else B for x in data]
 # -> CHOOSE VALUE
 ```
+## Classes and Objects
+### Python Classes
+#### CLASS
+
+Purpose: Blueprint/template for creating objects
+```bash
+class Student:
+    pass
+```
+
+#### OBJECT
+
+Purpose: Create an instance/object from a class
+```bash
+s1 = Student()
+```
+
+#### CONSTRUCTOR __init__()
+
+Purpose: Initialize object data
+> __init__() runs automatically when object is created
+```bash
+class Student:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+s1 = Student("Ali", 20)
+```
+
+#### self
+
+self = current object
+```bash
+print(s1.name)
+print(s1.age)
+```
+
+#### ATTRIBUTE
+
+Attribute = data belonging to an object
+```bash
+self.name
+self.age
+```
+
+#### METHOD
+
+Method = function inside a class
+```bash
+class Student:
+    def introduce(self):
+        print("Hello")
+
+s1 = Student()
+s1.introduce()
+```
+
+#### CLASS VARIABLE
+
+Shared class-level data
+```bash
+class Student:
+    university = "ABC University"
+
+print(Student.university)
+```
+
+#### INHERITANCE
+
+Purpose: Child class reuses parent functionality
+```bash
+class Animal:
+    def speak(self):
+        print("Sound")
+
+class Dog(Animal):
+    pass
+
+d = Dog()
+d.speak()
+```
+
+#### METHOD OVERRIDING
+
+> Child class provides its own version of a method
+```bash
+class Animal:
+    def speak(self):
+        print("Animal sound")
+
+class Dog(Animal):
+    def speak(self):
+        print("Bark")
+
+d = Dog()
+d.speak()
+```
+
+#### super()
+
+Purpose: Access parent-class functionality
+```bash
+class Animal:
+    def __init__(self, name):
+        self.name = name
+
+class Dog(Animal):
+    def __init__(self, name, breed):
+        super().__init__(name)     # Call parent constructor
+        self.breed = breed
+```
+
+#### CLASS METHOD
+
+Purpose: Work with class-level data
+> cls = current class
+```bash
+class Student:
+    school = "ABC"
+
+    @classmethod
+    def change_school(cls, name):
+        cls.school = name
+```
 
 
+#### STATIC METHOD
+
+Purpose: Utility method
+> Does not need self or cls
+```bash
+class Math:
+    @staticmethod
+    def add(a, b):
+        return a + b
+
+print(Math.add(5, 3))
+```
+
+## Collections
+### Python Collections
+#### Lists
+```bash
+# Purpose: Ordered + changeable collection
+
+numbers = [10, 20, 30]
+
+numbers.append(40)       # Add at end
+numbers.insert(1, 15)    # Add at position
+numbers.remove(20)       # Remove value
+numbers.pop()            # Remove last item
+numbers.sort()           # Sort
+numbers.reverse()        # Reverse
+numbers.clear()          # Remove all items
+
+print(numbers[0])        # Indexing
 
 
+# Properties:
+# Ordered      → Yes
+# Mutable      → Yes
+# Duplicates   → Yes
+# Indexing     → Yes
+```
+#### Tupple
+```bash
+# Purpose: Ordered + unchangeable collection
+
+numbers = (10, 20, 30)
+
+print(numbers[0])        # Indexing
+
+# numbers[0] = 100       # ❌ Cannot modify tuple
 
 
+# Properties:
+# Ordered      → Yes
+# Mutable      → No
+# Duplicates   → Yes
+# Indexing     → Yes
+```
+#### Set
+```bash
+
+# Purpose: Store unique values
+
+numbers = {10, 20, 30, 20}
+
+print(numbers)           # Duplicate 20 is not kept as a separate element
+
+numbers.add(40)          # Add item
+numbers.remove(20)       # Remove item
+numbers.discard(30)      # Remove if present
 
 
+# Properties:
+# Unique       → Yes
+# Mutable      → Yes
+# Duplicates   → No
+# Indexing     → No
+
+# operations
+a = {1, 2, 3}
+b = {3, 4, 5}
+
+a | b      # Union
+a & b      # Intersection
+a - b      # Difference
+a ^ b      # Symmetric difference
+```
+
+#### Dictionary
+```bash
+
+# Purpose: Store KEY → VALUE pairs
+
+student = {
+    "name": "Ali",
+    "age": 20,
+    "grade": "A"
+}
+
+
+# Access
+print(student["name"])
+
+
+# Add / Update
+student["age"] = 21
+student["city"] = "Multan"
+
+
+# Delete
+student.pop("age")
+
+del student["city"]
+
+
+# Important Methods
+student.keys()           # Get keys
+student.values()         # Get values
+student.items()          # Get key-value pairs
+student.get("name")      # Get value
+student.update(...)      # Add/update data
+student.pop("age")       # Remove item
+student.clear()          # Empty dictionary
+```
+
+## Exceptions
+### Python Exceptionss
+#### EXCEPTION?
+```bash
+# Purpose:
+# An exception is an error/problem that occurs
+# while the program is running.
+
+x = 10 / 0
+
+#  ZeroDivisionError
+```
+#### try
+```bash
+# Purpose:
+# Put risky code inside the try block.
+
+try:
+    x = 10 / 0
+```
+#### except
+```bash
+# Purpose:
+# Handle the exception/error.
+
+try:
+    x = 10 / 0
+
+except ZeroDivisionError:
+    print("Cannot divide by zero")
+```
+#### try + except
+```bash
+try:
+    number = int(input("Enter a number: "))
+    result = 10 / number
+
+except ValueError:
+    # Runs if input cannot be converted to int
+    print("Please enter a valid number")
+
+except ZeroDivisionError:
+    # Runs if user enters 0
+    print("Cannot divide by zero")
+```
+#### else
+```bash
+# Purpose:
+# else runs ONLY when no exception occurs.
+
+try:
+    number = int(input("Enter number: "))
+
+except ValueError:
+    print("Invalid input")
+
+else:
+    print("Valid number:", number)
+```
+#### finally
+```bash
+# Purpose:
+# finally ALWAYS runs,
+# whether an exception occurs or not.
+
+try:
+    print("Running program")
+
+except Exception:
+    print("Error occurred")
+
+finally:
+    print("Program finished")
+
+#### COMPLETE EXCEPTION STRUCTURE
+
+try:
+    # Risky code
+    number = int(input("Enter number: "))
+
+except ValueError:
+    # Handle error
+    print("Invalid input")
+
+else:
+    # Runs if there is NO error
+    print("Input is valid")
+
+finally:
+    # Always runs
+    print("Finished")
+```
+#### as e
+```bash
+# Purpose:
+# Store the exception information in a variable.
+
+try:
+    number = int("abc")
+
+except ValueError as e:
+    print(e)
+```
+#### raise
+```bash
+# Purpose:
+# Manually create/trigger an exception.
+
+age = -5
+
+if age < 0:
+    raise ValueError("Age cannot be negative")
+
+#### raise
+
+# Purpose:
+# Manually create/trigger an exception.
+
+age = -5
+
+if age < 0:
+    raise ValueError("Age cannot be negative")
+```
+#### CUSTOM EXCEPTION
+```bash
+# Purpose:
+# Create your own exception type.
+
+class MyError(Exception):
+    pass
+
+raise MyError("Something went wrong")
+```
 
 
 
@@ -1959,10 +2373,8 @@ with open("new.txt", "x") as file:
 with open("data.txt", "r", encoding="utf-8") as file:
     data = file.read()
 
-# Purpose:
 # Specify how text is encoded/decoded.
-#
-# IMPORTANT:
+# UTF-8 allows Python to correctly understand many different characters and languages.
 # UTF-8 is a common choice for text files.
 ```
 
