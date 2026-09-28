@@ -1,9 +1,9 @@
-# Python For Data Science
+# 7.1: Python For Data Science
 __Basic to Advance__\
 Including `Data Types`, `Variable`, `Numbers and Math`, `Controll Flow`, `Functions and Comprehensions`, `Classes and objects`, `Collections`, `Exceptions`, `File Handing` , `Imports and modules`, `Pakages`, `Virtual Environments`.
 
 
-- [Python For Data Science](#python-for-data-science)
+- [7.1: Python For Data Science](#71-python-for-data-science)
   - [Pyhton Fundamentals](#pyhton-fundamentals)
     - [Introduction](#introduction)
     - [Data Types](#data-types)
@@ -194,7 +194,6 @@ Including `Data Types`, `Variable`, `Numbers and Math`, `Controll Flow`, `Functi
       - [JSON FILE](#json-file)
       - [FILE MODE QUICK REVISION](#file-mode-quick-revision)
   - [IMPORTS \& MODULES](#imports--modules)
-  - [PACKAGES](#packages)
   - [PIP](#pip)
   - [VIRTUAL ENVIRONMENT](#virtual-environment)
 
@@ -2565,53 +2564,72 @@ print(data)
 
 ## IMPORTS & MODULES
 ```bash
-# Import module
+# Module = A Python file (.py) containing reusable code.
+
+# Import complete module
 import math
+print(math.sqrt(25))
 
-# Import specific item
+# Import a specific item
 from math import sqrt
+print(sqrt(25))
 
-# Create alias
+# Import multiple items
+from math import sqrt, pi
+
+# Create an alias (short name)
 import math as m
+print(m.sqrt(25))
 
-# Reusable Python file
-module.py
+# Import with an alias
+from math import sqrt as s
+print(s(25))
 
-# Check direct execution
-__name__ == "__main__"
-```
+# Own/custom module
+# calculator.py
+def add(a, b):
+    return a + b
 
-## PACKAGES
-```bash
-# Organize related modules
-Package
+# main.py
+import calculator
+print(calculator.add(5, 3))
 
-# Common package initialization file
-__init__.py
+# Check if the file is run directly
+if __name__ == "__main__":
+    print("Program started")
 
-# Import from package
-from package.module import item
+# IMPORTANT:
+# __name__ == "__main__" runs when the file is
+# executed directly, not normally when imported.
 ```
 
 ## PIP
 ```bash
-# Install
-pip install package
+# pip = Python package installer
 
-# Remove
-pip uninstall package
+# Install a package
+pip install requests
 
-# Show installed packages
+# Install a specific version
+pip install requests==2.32.0
+
+# Upgrade a package
+pip install --upgrade requests
+
+# Uninstall a package
+pip uninstall requests
+
+# Show all installed packages
 pip list
 
-# Package information
-pip show package
+# Show information about a package
+pip show requests
 
-# Upgrade
-pip install --upgrade package
+# Check outdated packages
+pip list --outdated
 
-# Store project dependencies
-requirements.txt
+# Install packages from requirements.txt
+pip install -r requirements.txt
 ```
 
 ## VIRTUAL ENVIRONMENT
@@ -2621,6 +2639,7 @@ python -m venv venv
 
 # Windows activation
 venv\Scripts\activate
+
 
 # Exit environment
 deactivate
