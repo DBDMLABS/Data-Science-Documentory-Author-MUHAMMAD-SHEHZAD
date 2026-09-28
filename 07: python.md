@@ -155,7 +155,8 @@
       - [Set](#set)
       - [Dictionary](#dictionary)
   - [Exceptions](#exceptions)
-    - [EXCEPTION?](#exception)
+    - [Python Exceptionss](#python-exceptionss)
+      - [EXCEPTION?](#exception)
       - [try](#try)
       - [except](#except)
       - [try + except](#try--except)
@@ -188,6 +189,10 @@
       - [WRITE CSV](#write-csv)
       - [JSON FILE](#json-file)
       - [FILE MODE QUICK REVISION](#file-mode-quick-revision)
+  - [IMPORTS \& MODULES](#imports--modules)
+  - [PACKAGES](#packages)
+  - [VIRTUAL ENVIRONMENT](#virtual-environment)
+  - [MISCELLANEOUS](#miscellaneous)
 
 ## Pyhton Fundamentals
 ### Introduction
@@ -2551,4 +2556,111 @@ print(data)
 # w -> creates file if needed, but overwrites existing data
 # a -> creates file if needed and adds to the end
 # x -> creates only if it doesn't already exist
+```
+
+
+## IMPORTS & MODULES
+```bash
+# Import module
+import math
+
+# Import specific item
+from math import sqrt
+
+# Create alias
+import math as m
+
+# Reusable Python file
+module.py
+
+# Check direct execution
+__name__ == "__main__"
+```
+
+## PACKAGES
+```bash
+# Organize related modules
+Package
+
+# Common package initialization file
+__init__.py
+
+# Import from package
+from package.module import item
+
+```bash
+
+## PIP
+
+# Install
+pip install package
+
+# Remove
+pip uninstall package
+
+# Show installed packages
+pip list
+
+# Package information
+pip show package
+
+# Upgrade
+pip install --upgrade package
+
+# Store project dependencies
+requirements.txt
+```
+
+## VIRTUAL ENVIRONMENT
+```bash
+# Create
+python -m venv venv
+
+# Windows activation
+venv\Scripts\activate
+
+# macOS/Linux activation
+source venv/bin/activate
+
+# Exit environment
+deactivate
+```
+
+## MISCELLANEOUS
+```bash
+# Check type
+type()
+
+# Object identity
+id()
+
+# Number of items
+len()
+
+# Available names/attributes
+dir()
+
+# Documentation
+help()
+
+# Index + value
+enumerate()
+
+# Combine iterables
+zip()
+
+# Return sorted list
+sorted()
+
+# Reverse iteration
+reversed()
+
+# At least one True
+any()
+
+# All True
+all()
+
+# Check condition/assumption
+assert
 ```
