@@ -1,6 +1,6 @@
 # Python For Data Science
 __Basic to Advance__\
-Including `Data Types`, `Variable`, `Numbers and Math`, `Controll Flow`, `Functions and Comprehensions`, `Classes and objects`, `Collections`, `Exceptions`, `File Handing` , `Imports and modules`, `Pakages`, `Virtual Environments`, `Miscellaneous`
+Including `Data Types`, `Variable`, `Numbers and Math`, `Controll Flow`, `Functions and Comprehensions`, `Classes and objects`, `Collections`, `Exceptions`, `File Handing` , `Imports and modules`, `Pakages`, `Virtual Environments`.
 
 
 - [Python For Data Science](#python-for-data-science)
