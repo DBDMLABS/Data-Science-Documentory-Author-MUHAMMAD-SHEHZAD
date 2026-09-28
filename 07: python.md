@@ -1,6 +1,7 @@
 # Python For Data Science
 - [Python For Data Science](#python-for-data-science)
   - [Pyhton Fundamentals](#pyhton-fundamentals)
+    - [Introduction](#introduction)
     - [Data Types](#data-types)
       - [PYTHON DATA TYPES Map](#python-data-types-map)
       - [Checking data type](#checking-data-type)
@@ -90,15 +91,15 @@
       - [For Loop](#for-loop)
       - [Range Function](#range-function)
       - [While Loop](#while-loop)
-        - [Difference Between for and while](#difference-between-for-and-while)
-        - [Break statement](#break-statement)
-        - [Continue Statement](#continue-statement)
-        - [pass statement](#pass-statement)
-        - [Nested Loop](#nested-loop)
-        - [Nested Loop pattern](#nested-loop-pattern)
-        - [Input-Based Control Flow](#input-based-control-flow)
-        - [match-case](#match-case)
-        - [assert](#assert)
+      - [Difference Between for and while](#difference-between-for-and-while)
+      - [Break statement](#break-statement)
+      - [Continue Statement](#continue-statement)
+      - [pass statement](#pass-statement)
+      - [Nested Loop](#nested-loop)
+      - [Nested Loop pattern](#nested-loop-pattern)
+      - [Input-Based Control Flow](#input-based-control-flow)
+      - [match-case](#match-case)
+      - [assert](#assert)
       - [Control Flow Revision](#control-flow-revision)
   - [Python Functions](#python-functions)
     - [Functions](#functions)
@@ -1077,7 +1078,7 @@ while count <= 3:
 else:
     print("Loop completed")
 ```
-##### Difference Between for and while
+#### Difference Between for and while
 | `for` Loop                                        | `while` Loop                        |
 | ------------------------------------------------- | ----------------------------------- |
 | Used to iterate over an iterable                  | Used while a condition is true      |
@@ -1086,7 +1087,7 @@ else:
 | Works naturally with strings, lists, ranges, etc. | Works with any Boolean condition    |
 | Less likely to become infinite                    | Can easily become infinite          |
 
-##### Break statement
+#### Break statement
 > break Statement immediately terminates the nearest loop.
 ```bash
 for i in range(1, 10):
@@ -1102,7 +1103,7 @@ for number in numbers:
         print("Number found")
         break
 ```
-##### Continue Statement
+#### Continue Statement
 > The continue statement skips the remaining code in the current iteration and moves to the next iteration.
 ```bash
 for i in range(1, 6):
@@ -1113,7 +1114,7 @@ for i in range(1, 6):
 # break stops the entire loop.
 # continue skips only the current iteration.
 ```
-##### pass statement
+#### pass statement
 > The pass statement does nothing.
 
 > It is used as a placeholder when Python requires a statement but you do not want to execute anything yet.
@@ -1135,7 +1136,7 @@ for i in range(5):
     pass 
 ```
 
-##### Nested Loop
+#### Nested Loop
 > A loop inside another loop is called a nested loop.
 ```bash
 for i in range(1, 4):
@@ -1155,7 +1156,7 @@ for number in range(1, 6):
         print(f"{number} x {i} = {number * i}")
 ```
 
-##### Nested Loop pattern
+#### Nested Loop pattern
 ```bash
 # Square:
 for i in range(4):
@@ -1232,7 +1233,7 @@ Useful for:
 > Finding vowels\
 > Checking characters\
 > Building reversed strings
-##### Input-Based Control Flow
+#### Input-Based Control Flow
 ```bash
 # Use input() with conditions to create interactive programs.
 age = int(input("Enter age: "))
@@ -1254,7 +1255,7 @@ while True:
 
     print("Invalid age")
 ```
-##### match-case
+#### match-case
 ```bash
 # Used for matching a value against different patterns.
 match choice:
@@ -1289,7 +1290,7 @@ except → handles the error
 else → runs if no error occurs
 finally → runs regardless of error
 ```
-##### assert
+#### assert
 ```bash
 # Checks whether a condition is true.
 age = 20
