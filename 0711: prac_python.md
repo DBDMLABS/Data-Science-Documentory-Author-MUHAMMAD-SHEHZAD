@@ -2202,16 +2202,6 @@ age = -5
 
 if age < 0:
     raise ValueError("Age cannot be negative")
-
-#### raise
-
-# Purpose:
-# Manually create/trigger an exception.
-
-age = -5
-
-if age < 0:
-    raise ValueError("Age cannot be negative")
 ```
 #### CUSTOM EXCEPTION
 ```bash
@@ -2549,12 +2539,10 @@ print(data)
 # "w"  -> WRITE / OVERWRITE
 # "a"  -> APPEND
 # "x"  -> CREATE
-#
 # "rb" -> READ BINARY
 # "wb" -> WRITE BINARY
-#
+
 # IMPORTANT:
-#
 # r -> file normally must already exist
 # w -> creates file if needed, but overwrites existing data
 # a -> creates file if needed and adds to the end
@@ -2608,22 +2596,22 @@ if __name__ == "__main__":
 # pip = Python package installer
 
 # Install a package
-pip install requests
+pip install package
 
 # Install a specific version
-pip install requests==2.32.0
+pip install package==2.32.0
 
 # Upgrade a package
-pip install --upgrade requests
+pip install --upgrade package
 
 # Uninstall a package
-pip uninstall requests
+pip uninstall package
 
 # Show all installed packages
 pip list
 
 # Show information about a package
-pip show requests
+pip show package
 
 # Check outdated packages
 pip list --outdated
@@ -2639,7 +2627,6 @@ python -m venv venv
 
 # Windows activation
 venv\Scripts\activate
-
 
 # Exit environment
 deactivate
