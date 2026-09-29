@@ -2,7 +2,6 @@
 How Should I Rename Files:
 
 ## Table of Content
-- [Professional Files and Folder Renaming](#professional-files-and-folder-renaming)
   - [Table of Content](#table-of-content)
     - [Use lowecase letters and underscores](#use-lowecase-letters-and-underscores)
     - [Be Descriptive and specific](#be-descriptive-and-specific)
