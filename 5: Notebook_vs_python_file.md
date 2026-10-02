@@ -1,5 +1,8 @@
-# .py VS .ipynb Which file is better for out tasks (Comparison)
----
+<div align="center">
+  
+  # .py VS .ipynb Which file is better for out tasks (Comparison)
+  </div>
+  
 | Comparison Point                     | `.py` — Python File                                           | `.ipynb` — Jupyter Notebook                                          | 🏆 Winner / Best Choice         |
 | ------------------------------------ | ------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------- |
 | **Nature**                           | Plain-text Python source code                                 | Interactive notebook containing code, Markdown, outputs and metadata | Depends                         |
