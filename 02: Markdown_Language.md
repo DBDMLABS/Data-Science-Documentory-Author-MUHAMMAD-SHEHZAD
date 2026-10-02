@@ -1,10 +1,12 @@
-# MARKDOWN LANGUAGE
+<div align="center">
+
+  # MARKDOWN LANGUAGE
 **Used by developers for documentation and comments.**
+</div>
 
 > **File Extension:** `file_name.md`
 ## Table of Content
 - [Markdown Language](#markdown-language)
-  - [Table of Content](#table-of-content)
     - [Headings](#headings)
     - [Block of Words](#block-of-words)
     - [Line Break](#line-break)
@@ -125,5 +127,9 @@ print(name)
 > **Easy method:** Install **Markdown All in One** → `Ctrl + Shift + X` → search **Markdown All in One** → use `Ctrl + Shift + P`**Create Table of Contents**.
 
 ---
+<div align="center">
+  
 Author: **MUHAMMAD SHEHZAD**\
 GitHub: https://github.com/dbdmlabs
+
+</div>
