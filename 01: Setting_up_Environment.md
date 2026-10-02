@@ -1,4 +1,7 @@
-# Setting Up Environment for Data Science
+<div align="center">
+  
+# Setting Up Environment for Data Science for Freshers
+</div>
 
 ## Rrquired Sofwares
 > VS Code (IDE: Integrated Development Environment) \
