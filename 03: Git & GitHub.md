@@ -1,13 +1,13 @@
-# Git and GitHub
+<div align="center">
+  
+  # Git and GitHub
+  Used by developers to **control versions** and collaborate on the same project.
 
----
+</div>
 
-Used by developers to **control versions** and collaborate on the same project.
 
 ## Table of Contents
 
-- [Git and GitHub](#git-and-github)
-  - [Table of Contents](#table-of-contents)
   - [Git Commands](#git-commands)
     - [Setup](#setup)
     - [Configure User Details](#configure-user-details)
@@ -58,7 +58,6 @@ Used by developers to **control versions** and collaborate on the same project.
   - [Tags](#tags)
   - [Basic GitHub Workflow](#basic-github-workflow)
   - [Quick Git Workflow](#quick-git-workflow)
-    - [Author](#author)
 
 
 ---
@@ -1039,10 +1038,12 @@ git push
 
 > **Edit → Add → Commit → Push**
 ---
-
+<div align="center">
+  
 ### Author
 
 **MUHAMMAD SHEHZAD**\
 GitHub: https://github.com/dbdmlabs
 
+</div>
 ---
