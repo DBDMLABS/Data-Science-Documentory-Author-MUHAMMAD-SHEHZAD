@@ -1,21 +1,21 @@
-# MINICONDA 
+<div align="center">
+  
+  # MINICONDA 
+
+  </div>
+  
 # Table of Content
-- [MINICONDA](#miniconda)
-- [Table of Content](#table-of-content)
   - [WHAT IS MINICONDA?](#what-is-miniconda)
-    - [Remember:](#remember)
   - [WHY DO WE USE CONDA?](#why-do-we-use-conda)
   - [EXAMPLE OF PYTHON VERSION CONFLICT](#example-of-python-version-conflict)
   - [EXAMPLE OF PACKAGE VERSION CONFLICT](#example-of-package-version-conflict)
   - [SOLUTION — VIRTUAL ENVIRONMENTS](#solution--virtual-environments)
-    - [RESULT](#result)
   - [EASY FORMULA:](#easy-formula)
   - [MINICONDA WITH DIFFERENT TYPES OF PROJECTS](#miniconda-with-different-types-of-projects)
   - [WHAT IS A CONDA ENVIRONMENT?](#what-is-a-conda-environment)
   - [BASIC CONDA COMMANDS](#basic-conda-commands)
     - [Check Conda installation](#check-conda-installation)
     - [CREATE A NEW ENVIRONMENT](#create-a-new-environment)
-      - [Explanation:](#explanation)
     - [ACTIVATE AN ENVIRONMENT](#activate-an-environment)
     - [DEACTIVATE AN ENVIRONMENT](#deactivate-an-environment)
     - [LIST ALL ENVIRONMENTS](#list-all-environments)
@@ -26,7 +26,6 @@
     - [INSTALL JUPYTER](#install-jupyter)
   - [COMPLETE DATA SCIENCE ENVIRONMENT](#complete-data-science-environment)
   - [FINAL CONCEPT](#final-concept)
-    - [Author](#author)
 
 
 
@@ -342,10 +341,11 @@ jupyter notebook
 environments so that different projects can use
 different Python versions and packages without
 interfering with each other.
+<div align="center">
 
 ### Author
 
 **MUHAMMAD SHEHZAD**\
 GitHub: https://github.com/dbdmlabs
 
----
+</div>
