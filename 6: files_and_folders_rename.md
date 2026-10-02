@@ -1,5 +1,9 @@
-# Professional Files and Folder Renaming 
+<div align="center">
+  
+  # Professional Files and Folder Renaming 
 How Should I Rename Files:
+</div>
+
 
 ## Table of Content
   - [Table of Content](#table-of-content)
@@ -13,7 +17,6 @@ How Should I Rename Files:
     - [Avoid names starting from numbers](#avoid-names-starting-from-numbers)
     - [Use plural form of collections](#use-plural-form-of-collections)
     - [Use README file](#use-readme-file)
-    - [Author](#author)
 
 ### Use lowecase letters and underscores
 > For both files and folders and avoid from spaces. e.g: `data_preprocessing.py`
@@ -53,10 +56,11 @@ How Should I Rename Files:
 
 ### Use README file
 > use readme file in each folder to explain theire contents, struucture and any specific instructions.
-
+<div align="center">
+  
 ### Author
 
 **MUHAMMAD SHEHZAD**\
 GitHub: https://github.com/dbdmlabs
+</div>
 
----
