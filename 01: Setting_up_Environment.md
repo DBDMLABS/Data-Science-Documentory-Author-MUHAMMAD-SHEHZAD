@@ -1,6 +1,6 @@
 <div align="center">
   
-# Setting Up Environment for Data Science for Freshers
+# Setting Up Environment for Data Science
 </div>
 
 ## Rrquired Sofwares
