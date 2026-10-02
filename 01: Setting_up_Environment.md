@@ -1,13 +1,14 @@
 <div align="center">
   
 # Setting Up Environment for Data Science
+
 </div>
 
 ## Rrquired Sofwares
-> VS Code (IDE: Integrated Development Environment) \
-> Setup github (Login VS Code with github)\
-> Minicoda (To make diff environments) \
-> Git (Version Controll Sys.)
+> **Visual Studio Code:** Code editor (IDE)\
+> **Git:** Version control system for tracking changes\
+> **GitHub account:** Online hosting for Git repositories; you can sign into GitHub from VS Code\
+> **Miniconda:** Creates separate Python environments for different projects
 
 ## VS Code imp extentions for first time setup to make work easier.
 > **DotENV** — Environment variables\
