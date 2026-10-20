@@ -1,30 +1,44 @@
 # Git and GitHub
 
----
+> Used by developers to **track versions** of their files and **collaborate** on the same project.
 
-Used by developers to **control versions** and collaborate on the same project.
+| | Git | GitHub |
+|---|---|---|
+| **What** | A **version control system** (software) | A **website** that hosts Git repositories online |
+| **Where** | Runs on your computer | Runs in the cloud (https://github.com) |
+| **Works offline?** | Yes | No |
+| **Used for** | Saving snapshots (commits) of your project, branching, undoing changes | Backup, sharing, teamwork, Pull Requests, portfolio |
+
+> **Remember:** Git is the tool, GitHub is the place where you store and share Git projects.
 
 ## Table of Contents
 
 - [Git and GitHub](#git-and-github)
   - [Table of Contents](#table-of-contents)
-  - [Git Commands](#git-commands)
-    - [Setup](#setup)
+  - [Important Terms](#important-terms)
+  - [Setup](#setup)
+    - [Check Git Version](#check-git-version)
     - [Configure User Details](#configure-user-details)
+    - [Connect to GitHub with SSH (Recommended)](#connect-to-github-with-ssh-recommended)
+  - [Initialize Repository](#initialize-repository)
   - [Git 3-Stage Workflow](#git-3-stage-workflow)
+    - [Check Status](#check-status)
     - [Add to Staging](#add-to-staging)
     - [Commit](#commit)
-  - [Initialize Repository](#initialize-repository)
+    - [Writing Good Commit Messages](#writing-good-commit-messages)
   - [See Changes \& History](#see-changes--history)
   - [.gitignore \& .gitkeep](#gitignore--gitkeep)
     - [.gitignore](#gitignore)
+    - [.gitignore for Data Science Projects](#gitignore-for-data-science-projects)
     - [.gitkeep](#gitkeep)
+  - [Remove \& Rename Files](#remove--rename-files)
   - [Unstaging \& Restore](#unstaging--restore)
   - [Undo Commits](#undo-commits)
-    - [Soft Reset](#soft-reset)
-    - [Mixed Reset](#mixed-reset)
-    - [Hard Reset](#hard-reset)
-  - [Revert Commit](#revert-commit)
+    - [Amend the Last Commit](#amend-the-last-commit)
+    - [Reset (Soft, Mixed, Hard)](#reset-soft-mixed-hard)
+    - [Revert Commit](#revert-commit)
+    - [Recover Lost Commits (Reflog)](#recover-lost-commits-reflog)
+    - [Which Undo Should I Use?](#which-undo-should-i-use)
   - [Branching](#branching)
   - [Merging Branches](#merging-branches)
     - [Fast-Forward Merge](#fast-forward-merge)
@@ -32,42 +46,55 @@ Used by developers to **control versions** and collaborate on the same project.
     - [Squash Merge](#squash-merge)
     - [Octopus Merge](#octopus-merge)
   - [Merge Conflicts](#merge-conflicts)
-  - [Remote Repository](#remote-repository)
-  - [Clone Repository](#clone-repository)
-  - [Push \& Pull](#push--pull)
-    - [Push](#push)
-    - [Pull](#pull)
-  - [Fetch](#fetch)
-  - [Remote Branches](#remote-branches)
-  - [Fork](#fork)
-    - [Fork a Repository](#fork-a-repository)
-    - [Clone Your Fork](#clone-your-fork)
-    - [Add Original Repo as Upstream](#add-original-repo-as-upstream)
-    - [Create a Branch](#create-a-branch)
-    - [Push to Your Fork](#push-to-your-fork)
-    - [Create a Pull Request](#create-a-pull-request)
-    - [Review \& Merge](#review--merge)
-    - [Sync Fork with Upstream](#sync-fork-with-upstream)
-    - [Fetch Remote Branches](#fetch-remote-branches)
-    - [Create Local Branch from Remote Branch](#create-local-branch-from-remote-branch)
-    - [Make Changes \& Push](#make-changes--push)
-    - [Another Developer Pulls the Changes](#another-developer-pulls-the-changes)
-    - [Complete Fork Workflow](#complete-fork-workflow)
   - [Stash](#stash)
   - [Git Rebase](#git-rebase)
+  - [Cherry-Pick](#cherry-pick)
   - [Tags](#tags)
+  - [Remote Repository](#remote-repository)
+  - [Clone Repository](#clone-repository)
+  - [Push, Pull \& Fetch](#push-pull--fetch)
+    - [Push](#push)
+    - [Pull](#pull)
+    - [Fetch](#fetch)
+    - [Daily Workflow](#daily-workflow)
+  - [Remote Branches](#remote-branches)
+  - [Fork \& Pull Request Workflow](#fork--pull-request-workflow)
+    - [Step 1 — Fork the Repository](#step-1--fork-the-repository)
+    - [Step 2 — Clone Your Fork](#step-2--clone-your-fork)
+    - [Step 3 — Add the Original Repo as Upstream](#step-3--add-the-original-repo-as-upstream)
+    - [Step 4 — Create a Branch and Make Changes](#step-4--create-a-branch-and-make-changes)
+    - [Step 5 — Push to Your Fork](#step-5--push-to-your-fork)
+    - [Step 6 — Create a Pull Request](#step-6--create-a-pull-request)
+    - [Step 7 — Review \& Merge](#step-7--review--merge)
+    - [Step 8 — Sync Your Fork with Upstream](#step-8--sync-your-fork-with-upstream)
+    - [Complete Fork Workflow](#complete-fork-workflow)
+  - [Team Workflow on a Shared Remote Branch](#team-workflow-on-a-shared-remote-branch)
   - [Basic GitHub Workflow](#basic-github-workflow)
-  - [Quick Git Workflow](#quick-git-workflow)
     - [Author](#author)
-
 
 ---
 
-## Git Commands
+## Important Terms
 
-### Setup
+| Term | Meaning |
+|---|---|
+| **Repository (repo)** | A project folder tracked by Git (contains a hidden `.git` folder) |
+| **Commit** | A saved snapshot of your files with a message |
+| **Staging area** | A waiting area where you choose which changes go into the next commit |
+| **Branch** | An independent line of work (e.g. `main`, `feature-login`) |
+| **HEAD** | Pointer to the commit/branch you are currently on |
+| **Merge** | Combine changes from one branch into another |
+| **Remote** | A copy of the repo on another place, usually GitHub (`origin`) |
+| **Clone** | Download a full copy of a remote repo |
+| **Push / Pull** | Upload / download commits to / from the remote |
+| **Fork** | Your own copy of someone else's GitHub repo |
+| **Pull Request (PR)** | A request to merge your branch into another repo/branch |
 
-> Check Git version:
+---
+
+## Setup
+
+### Check Git Version
 
 ```bash
 git --version
@@ -75,111 +102,171 @@ git --version
 
 ### Configure User Details
 
+Your name and email are attached to every commit you make.
+
 ```bash
 git config --global user.name "User Name"
 git config --global user.email "user@email.com"
 ```
 
-> Check configuration:
+> Use the **same email** as your GitHub account so commits are linked to your profile.
+
+Recommended extra settings:
+
+```bash
+# Name the first branch "main" in every new repository
+git config --global init.defaultBranch main
+
+# Use VS Code as the editor for commit messages
+git config --global core.editor "code --wait"
+```
+
+Check configuration:
 
 ```bash
 git config --list
+git config user.name
 ```
 
----
+### Connect to GitHub with SSH (Recommended)
 
-## Git 3-Stage Workflow
-
-**Working Directory → Staging Area → Repository**
-
-> Check status:
+SSH lets you push and pull without typing a password every time.
 
 ```bash
-git status
+# 1. Create a key (press Enter to accept the defaults)
+ssh-keygen -t ed25519 -C "user@email.com"
+
+# 2. Show the public key and copy it
+cat ~/.ssh/id_ed25519.pub
 ```
 
-### Add to Staging
-
-> Specific file:
+3. On GitHub: **Settings → SSH and GPG keys → New SSH key** → paste → **Add SSH key**.
+4. Test the connection:
 
 ```bash
-git add file_name.txt
+ssh -T git@github.com
+# Hi username! You've successfully authenticated...
 ```
 
-> All files:
-
-```bash
-git add .
-```
-
-> Multiple files:
-
-```bash
-git add file1.txt file2.txt
-```
-
-> Check status again:
-
-```bash
-git status
-```
-
-### Commit
-
-> Specific staged changes:
-
-```bash
-git commit -m "Your message"
-```
+> **HTTPS vs SSH URLs:**\
+> HTTPS → `https://github.com/username/repository.git`\
+> SSH → `git@github.com:username/repository.git`
 
 ---
 
 ## Initialize Repository
 
-> Create folder:
+Turn a normal folder into a Git repository:
 
 ```bash
+# Create folder
 mkdir dbdm-project
-```
 
-> Enter folder:
-
-```bash
+# Enter folder
 cd dbdm-project
-```
 
-> Initialize Git:
-
-```bash
+# Initialize Git (creates a hidden .git folder)
 git init
 ```
+
+> **Warning:** Never delete the `.git` folder — it contains the entire history of your project.
+
+---
+
+## Git 3-Stage Workflow
+
+```text
+ Working Directory  ──git add──►  Staging Area  ──git commit──►  Repository
+ (edit files)                     (choose changes)                (saved history)
+```
+
+| Stage | Meaning |
+|---|---|
+| **Working Directory** | Files you are editing right now |
+| **Staging Area** | Changes selected for the next commit |
+| **Repository** | Permanently saved commits |
+
+### Check Status
+
+```bash
+git status
+```
+
+| Status | Meaning |
+|---|---|
+| **Untracked** | New file, Git is not tracking it yet |
+| **Modified** | Tracked file changed but not staged |
+| **Staged** | Ready to be committed |
+
+### Add to Staging
+
+```bash
+# Specific file
+git add file_name.txt
+
+# Multiple files
+git add file1.txt file2.txt
+
+# All files in the current folder (and subfolders)
+git add .
+
+# All files of one type
+git add *.py
+```
+
+### Commit
+
+```bash
+# Commit staged changes with a message
+git commit -m "Your message"
+
+# Stage all TRACKED modified files and commit in one step
+git commit -am "Your message"
+```
+
+> **Note:** `-am` does not include **new (untracked)** files. Use `git add .` for those.
+
+### Writing Good Commit Messages
+
+| Bad | Good |
+|---|---|
+| `update` | `Add data cleaning step for missing ages` |
+| `fixed stuff` | `Fix wrong column name in sales plot` |
+| `asdf` | `Remove unused imports from model.py` |
+
+> **Rules:** Start with a verb (Add, Fix, Update, Remove), keep it short (≤ 50 characters), and describe **what** changed.
 
 ---
 
 ## See Changes & History
 
-> See changes:
-
 ```bash
+# Changes not yet staged
 git diff
-```
 
-> Commit history:
+# Changes that are staged (will go into the next commit)
+git diff --staged
 
-```bash
+# Commit history (press q to quit)
 git log
-```
 
-> Compact history:
-
-```bash
+# Compact history: one line per commit
 git log --oneline
-```
 
-> See branches with commits:
-
-```bash
+# All branches as a graph
 git log --oneline --all --graph
+
+# Last 5 commits
+git log --oneline -5
+
+# History of one file
+git log --oneline -- file_name.txt
+
+# Show details of one commit
+git show commit_code
+
+# Who changed each line of a file
+git blame file_name.txt
 ```
 
 ---
@@ -188,31 +275,63 @@ git log --oneline --all --graph
 
 ### .gitignore
 
-> Create a file named:
+A file named `.gitignore` tells Git which files and folders to **ignore** (never track).
 
 ```text
-.gitignore
+file_name.txt      # one file
+folder/            # a whole folder
+*.log              # all .log files
+temp*              # all files starting with temp
+!important.log     # exception: DO track this file
 ```
-
-> Examples:
-
-```text
-file_name.txt
-folder/
-*.log
-temp*
-!important.log
-```
-
-> Add `.gitignore`:
 
 ```bash
 git add .gitignore
+git commit -m "Add .gitignore"
 ```
+
+> **Important Point:** `.gitignore` only affects **untracked** files. If a file is already tracked, stop tracking it with:
+> ```bash
+> git rm --cached file_name.txt
+> ```
+
+### .gitignore for Data Science Projects
+
+```text
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Secrets (NEVER push these)
+.env
+*.key
+
+# Large data and models
+data/raw/
+*.csv
+*.zip
+*.pkl
+*.joblib
+
+# Editor / OS files
+.vscode/
+.DS_Store
+Thumbs.db
+```
+
+> **Tip:** GitHub provides ready-made templates: https://github.com/github/gitignore
 
 ### .gitkeep
 
-> `.gitkeep` is used to keep an empty folder in Git.
+Git does **not** track empty folders. Put an empty `.gitkeep` file inside to keep the folder:
 
 ```bash
 mkdir uploads
@@ -220,216 +339,271 @@ touch uploads/.gitkeep
 git add uploads/.gitkeep
 ```
 
+> `.gitkeep` is not a special Git feature — it is just a common name for an empty placeholder file.
+
+---
+
+## Remove & Rename Files
+
+```bash
+# Delete a file and stage the deletion
+git rm file_name.txt
+
+# Stop tracking a file but keep it on your computer
+git rm --cached file_name.txt
+
+# Rename or move a file
+git mv old_name.txt new_name.txt
+```
+
 ---
 
 ## Unstaging & Restore
 
-> Remove specific file from staging:
-
 ```bash
+# Remove a specific file from staging (keeps your edits)
 git restore --staged file_name.txt
-```
 
-> Remove all files from staging:
-
-```bash
+# Remove all files from staging
 git restore --staged .
-```
 
-> Discard changes in a file and restore last committed version:
-
-```bash
+# Discard changes in a file and restore the last committed version
 git restore file_name.txt
+
+# Restore a file from a specific commit
+git restore --source commit_code file_name.txt
 ```
 
-> **Warning:** This permanently discards the uncommitted changes in that file.
+> **Warning:** `git restore file_name.txt` permanently discards the uncommitted changes in that file.
 
 ---
 
 ## Undo Commits
 
-### Soft Reset
+### Amend the Last Commit
 
-> Undo last commit and keep changes **staged**:
+Fix the last commit message, or add a forgotten file to it:
 
 ```bash
+# Change the last commit message
+git commit --amend -m "Correct message"
+
+# Add a forgotten file to the last commit
+git add forgotten_file.txt
+git commit --amend --no-edit
+```
+
+> Only amend commits that you have **not pushed** yet.
+
+### Reset (Soft, Mixed, Hard)
+
+`git reset` moves the branch back to an earlier commit. `HEAD~1` means "one commit before the current one".
+
+| Command | Commit undone? | Changes kept? | Where are the changes? |
+|---|---|---|---|
+| `git reset --soft HEAD~1` | Yes | Yes | **Staged** |
+| `git reset HEAD~1` (mixed, default) | Yes | Yes | **Unstaged** (in working directory) |
+| `git reset --hard HEAD~1` | Yes | **No** | **Deleted** |
+
+```bash
+# Soft: undo last commit, keep changes staged
 git reset --soft HEAD~1
-```
 
-### Mixed Reset
-
-> Undo last commit and keep changes **unstaged**:
-
-```bash
+# Mixed: undo last commit, keep changes unstaged
 git reset HEAD~1
-```
 
-### Hard Reset
-
-> Undo last commit and delete uncommitted changes:
-
-```bash
+# Hard: undo last commit and DELETE the changes
 git reset --hard HEAD~1
+
+# Undo the last 3 commits
+git reset --soft HEAD~3
 ```
 
-> Hard reset can permanently delete work.
+> **Warning:** `--hard` can permanently delete work. Never reset commits that are already pushed and shared — use `git revert` instead.
 
----
+### Revert Commit
 
-## Revert Commit
-
-> Safely undo a specific commit by creating a new commit:
+Safely undo a specific commit by creating a **new** commit that does the opposite. History is not rewritten, so it is safe for pushed commits.
 
 ```bash
+# Find the commit code
+git log --oneline
+
+# Revert it
 git revert commit_code
 ```
 
-> To see commit code:
+```text
+Before:  A --- B --- C          (C has a bug)
+After:   A --- B --- C --- C'   (C' undoes C)
+```
+
+### Recover Lost Commits (Reflog)
+
+Git remembers everywhere `HEAD` has been, even after a hard reset.
 
 ```bash
-git log --oneline
+# See the history of HEAD movements
+git reflog
+
+# Go back to a lost commit
+git reset --hard HEAD@{2}
 ```
+
+### Which Undo Should I Use?
+
+| Situation | Command |
+|---|---|
+| Unstage a file | `git restore --staged file` |
+| Discard edits in a file | `git restore file` |
+| Fix the last commit message | `git commit --amend -m "..."` |
+| Undo last commit (not pushed), keep work | `git reset --soft HEAD~1` |
+| Undo a commit that is already pushed | `git revert commit_code` |
+| Throw away all local changes | `git reset --hard` |
+| Recover after a mistake | `git reflog` |
 
 ---
 
 ## Branching
 
-> Create branch:
+A branch lets you work on a feature without affecting `main`.
 
-```bash
-git branch branch_name
+```text
+main:     A --- B --- C
+                       \
+feature:                D --- E
 ```
 
-> Switch branch:
-
 ```bash
-git switch branch_name
-```
-
-> Create + switch:
-
-```bash
-git switch -c branch_name
-```
-
-> Check branches:
-
-```bash
+# List branches (* = current branch)
 git branch
-```
 
-> Switch to main:
+# Create a branch
+git branch branch_name
 
-```bash
+# Switch to a branch
+git switch branch_name
+
+# Create + switch in one step
+git switch -c branch_name
+
+# Switch back to main
 git switch main
-```
 
-> Delete branch:
+# Rename the current branch
+git branch -m new_name
 
-```bash
+# Delete a merged branch
 git branch -d branch_name
-```
 
-> Force delete:
-
-```bash
+# Force delete an unmerged branch
 git branch -D branch_name
 ```
+
+> **Note:** `git checkout branch_name` and `git checkout -b branch_name` are the older commands that do the same as `git switch` / `git switch -c`. You will see both in tutorials.
+
 ---
 
 ## Merging Branches
 
-> Switch to the branch that will receive changes:
-
 ```bash
+# 1. Switch to the branch that will RECEIVE the changes
 git switch main
-```
 
-> Merge another branch:
-
-```bash
+# 2. Merge the other branch into it
 git merge branch_name
 ```
 
+| Type | When it happens | Merge commit? |
+|---|---|---|
+| **Fast-forward** | `main` has no new commits since the branch was created | No |
+| **Three-way** | Both branches have new commits | Yes |
+| **Squash** | You want all branch commits as **one** commit | No (one normal commit) |
+| **Octopus** | Merging 3+ branches at once | Yes (with many parents) |
+
 ### Fast-Forward Merge
 
-> Main has no new commit since the branch was created.
+`main` has no new commits, so Git just moves `main` forward.
 
 ```text
-main ───────────────►
-       \
-        feature ────►
+Before:
+main:     A --- B
+                 \
+feature:          C --- D
+
+After:
+main:     A --- B --- C --- D
 ```
+
 > Practice
 
-``` bash
+```bash
 # Step 1: Create and switch to feature branch
 git switch -c feature
 
 # Step 2: Create a new file and commit
 echo "Feature Code" > feature.txt
 git add .
-git commit -m "added feature file"
+git commit -m "Add feature file"
 
 # Step 3: Switch back to main
 git switch main
 
-# Step 4: Merge
+# Step 4: Merge (fast-forward)
 git merge feature
 ```
+
 ### Three-Way Merge
 
-> Both branches have new commits.
+Both branches have new commits, so Git creates a **merge commit** `M` that joins them.
 
 ```text
-        feature ───►
-       /
-main ──●───────────►
-       \
-        changes ───►
+Before:
+main:     A --- B --- E
+                 \
+login:            C --- D
+
+After:
+main:     A --- B --- E --- M
+                 \         /
+login:            C --- D
 ```
 
 > Practice
 
-``` bash
+```bash
 # Step 1: Create login-feature branch
 git switch -c login-feature
 
 # Step 2: Add a file on the feature branch
 echo "Login Feature" > login.txt
 git add .
-git commit -m "added login"
+git commit -m "Add login"
 
 # Step 3: Switch back to main and add a different file
 git switch main
 echo "Main Update" > main.txt
 git add .
-git commit -m "main updated"
+git commit -m "Update main"
 
-# Step 4: Merge with -m to avoid Vim editor
-git merge login-feature -m "three way merge completed"
+# Step 4: Merge (-m gives the merge commit a message, so no editor opens)
+git merge login-feature -m "Merge login-feature into main"
 ```
-
-> Git creates a **merge commit**.
 
 ### Squash Merge
 
-> Combines feature commits into one commit.
+Combines all commits of a branch into **one** new commit on `main`. Keeps the `main` history clean.
 
-```bash
-Feature branch before squash:
+```text
+ui-feature:   A --- B --- C(navbar) --- D(footer) --- E(sidebar)
 
-ui-feature:   A --- B --- C --- D --- E
-                    (navbar) (footer) (sidebar)
-
-After squash merge onto main:
-
+After squash merge:
 main:         A --- B --- F
-                          |
-                    (UI Feature Complete)
-                    All 3 commits combined into one
+                          (F = "Add UI feature": navbar + footer + sidebar)
 ```
+
 > Practice
+
 ```bash
 # Step 1: Create ui-feature branch
 git switch -c ui-feature
@@ -437,197 +611,399 @@ git switch -c ui-feature
 # Step 2: Make multiple commits
 echo "Navbar" > navbar.txt
 git add .
-git commit -m "navbar added"
+git commit -m "Add navbar"
 
 echo "Footer" > footer.txt
 git add .
-git commit -m "footer added"
+git commit -m "Add footer"
 
 echo "Sidebar" > sidebar.txt
 git add .
-git commit -m "sidebar added"
+git commit -m "Add sidebar"
 
 # Step 3: Switch to main
 git switch main
 
 # Step 4: Squash merge (stages all changes but does NOT commit yet)
 git merge --squash ui-feature
+
+# Step 5: Create the single combined commit
+git commit -m "Add UI feature (navbar, footer, sidebar)"
+
+# Step 6: Delete the branch (-D because Git does not see it as merged)
+git branch -D ui-feature
 ```
+
 ### Octopus Merge
 
-> Merges multiple branches at once.
+Merges **several** branches at once into one merge commit.
 
-```bash
-Before octopus merge:
+```text
+Before:
+feature-a:  A --- X
+feature-b:  A --- Y
+feature-c:  A --- Z
 
-feature-a:   A --- X
-feature-b:   A --- Y
-feature-c:   A --- Z
-
-After octopus merge:
-
-             X
-            / \
-main:  A---+   M  (one merge commit, 3 parents)
-            \ /|
-             Y |
-              \|
-               Z
+After:
+main:  A ─────────────── M     (one merge commit with 4 parents: A, X, Y, Z)
+       ├── X (feature-a) ┤
+       ├── Y (feature-b) ┤
+       └── Z (feature-c) ┘
 ```
->Practice
+
+> Practice
+
 ```bash
 # Branch 1: feature-a
 git switch -c feature-a
 echo "A Feature" > a.txt
 git add .
-git commit -m "feature a"
+git commit -m "Add feature a"
 
 # Branch 2: feature-b
 git switch main
 git switch -c feature-b
 echo "B Feature" > b.txt
 git add .
-git commit -m "feature b"
+git commit -m "Add feature b"
 
 # Branch 3: feature-c
 git switch main
 git switch -c feature-c
 echo "C Feature" > c.txt
 git add .
-git commit -m "feature c"
+git commit -m "Add feature c"
 
 # Switch to main and merge all three at once
 git switch main
-git merge feature-a feature-b feature-c -m "octopus merge all features"
+git merge feature-a feature-b feature-c -m "Octopus merge all features"
 ```
+
+> **Note:** An octopus merge stops if there is any conflict. Then merge the branches one by one instead.
+
 ---
 
 ## Merge Conflicts
 
-> Check conflict:
+A **conflict** happens when two branches change the **same lines** of the same file. Git cannot decide which version to keep, so you must choose.
 
 ```bash
+# See which files have conflicts
 git status
 ```
 
-> Open the conflicted file and choose the required changes.
+Open the conflicted file. Git marks the conflict like this:
 
 ```text
 <<<<<<< HEAD
-Current branch
+Text from the current branch (main)
 =======
-Incoming branch
+Text from the incoming branch
 >>>>>>> branch_name
 ```
 
-> After fixing:
+**Resolve it:**
+1. Keep the text you want (one side, the other, or a mix).
+2. Delete the markers `<<<<<<<`, `=======`, `>>>>>>>`.
+3. Save the file, then:
 
 ```bash
 git add .
 git commit -m "Resolve merge conflict"
 ```
 
-> Abort merge:
+> **Tip:** VS Code shows buttons above each conflict: **Accept Current Change**, **Accept Incoming Change**, **Accept Both Changes**, **Compare Changes**.
+
+Cancel the merge and go back to how things were:
 
 ```bash
 git merge --abort
 ```
 
+> Practice (create a conflict on purpose)
+
+```bash
+echo "Hello" > greet.txt
+git add .
+git commit -m "Add greet"
+
+git switch -c spanish
+echo "Hola" > greet.txt
+git commit -am "Spanish greeting"
+
+git switch main
+echo "Salaam" > greet.txt
+git commit -am "Urdu greeting"
+
+git merge spanish   # CONFLICT in greet.txt
+```
+
+---
+
+## Stash
+
+**Stash** temporarily saves uncommitted changes so you can switch branches with a clean working directory.
+
+```bash
+# Save uncommitted changes
+git stash
+
+# Save with a description (and include untracked files)
+git stash push -u -m "half-done login page"
+
+# See all stashes
+git stash list
+
+# Restore the latest stash and remove it from the list
+git stash pop
+
+# Restore without removing it from the list
+git stash apply
+
+# Restore a specific stash
+git stash apply stash@{1}
+
+# Delete the latest stash
+git stash drop
+
+# Delete all stashes
+git stash clear
+```
+
+> Workflow
+
+```bash
+# Nobita is working on feature-login
+# He edited login.txt but it is not ready to commit
+
+# Urgent bug needs fixing! Stash current work
+git stash
+
+# Switch to main branch
+git switch main
+
+# Fix the bug
+git add bugfix.txt
+git commit -m "Fix urgent bug"
+git push
+
+# Go back to the feature branch
+git switch feature-login
+
+# Bring back the stashed work and continue
+git stash pop
+```
+
+---
+
+## Git Rebase
+
+**Rebase** moves your branch's commits so they start from the **latest** commit of another branch. The result is a straight, clean history with no merge commit.
+
+```text
+Starting point:
+main:     A --- B --- C
+                 \
+feature:          D --- E
+
+MERGE (git merge main on feature):
+main:     A --- B --- C
+                 \     \
+feature:          D --- E --- M    (merge commit M)
+
+REBASE (git rebase main on feature):
+main:     A --- B --- C
+                       \
+feature:                D' --- E'   (commits re-created on top of C)
+```
+
+```bash
+# Nobita's feature branch is behind main
+git switch feature-login
+
+# Re-apply his commits on top of the latest main
+git rebase main
+
+# If there is a conflict: fix the file, then
+git add .
+git rebase --continue
+
+# Or cancel the rebase
+git rebase --abort
+```
+
+| Merge | Rebase |
+|---|---|
+| Keeps the full true history | Creates a clean straight-line history |
+| Adds a merge commit | No merge commit |
+| Safe for shared branches | **Only for local / unshared commits** |
+
+> **Golden rule:** Never rebase commits that have been pushed to GitHub and shared with others. Only rebase your own local commits.
+
+---
+
+## Cherry-Pick
+
+Copy **one specific commit** from another branch onto the current branch:
+
+```bash
+# Find the commit code on the other branch
+git log --oneline feature-login
+
+# Apply that commit to the current branch
+git switch main
+git cherry-pick commit_code
+```
+
+> Useful when you need just one bug fix from a branch, without merging the whole branch.
+
+---
+
+## Tags
+
+Tags mark important commits, usually **release versions** (`v1.0`, `v2.1`).
+
+```bash
+# Create a lightweight tag on the current commit
+git tag v1.0
+
+# Create an annotated tag with a message (recommended for releases)
+git tag -a v1.0 -m "First release"
+
+# Tag an older commit
+git tag v0.9 commit_code
+
+# List tags
+git tag
+
+# See tag details
+git show v1.0
+
+# Push one tag
+git push origin v1.0
+
+# Push all tags
+git push origin --tags
+
+# Delete a tag (local and remote)
+git tag -d v1.0
+git push origin --delete v1.0
+```
+
+> **Note:** `git push` does **not** push tags automatically.
+
 ---
 
 ## Remote Repository
 
-> Add GitHub remote:
+A **remote** is a link to a repository on GitHub. The default name is `origin`.
+
+```bash
+# Add a GitHub remote
+git remote add origin https://github.com/username/repository.git
+
+# Check remotes
+git remote -v
+
+# Change the URL (e.g. switch from HTTPS to SSH)
+git remote set-url origin git@github.com:username/repository.git
+
+# Rename a remote
+git remote rename origin upstream
+
+# Remove a remote
+git remote remove origin
+```
+
+**Push an existing local project to a new GitHub repo:**
+1. On GitHub: **New repository** → give it a name → **do not** add a README → **Create repository**.
+2. In your project folder:
 
 ```bash
 git remote add origin https://github.com/username/repository.git
-```
-
-> Check remote:
-
-```bash
-git remote -v
-```
-
-> Rename remote:
-
-```bash
-git remote rename origin upstream
-```
-
-> Remove remote:
-
-```bash
-git remote remove origin
+git branch -M main
+git push -u origin main
 ```
 
 ---
 
 ## Clone Repository
 
-> Download an existing GitHub repository:
+Download a full copy of an existing GitHub repository (all files + complete history):
 
 ```bash
+# Clone into a folder with the repository's name
 git clone https://github.com/username/repository.git
-```
 
-> Enter repository:
+# Clone into a folder with a different name
+git clone https://github.com/username/repository.git my-folder
 
-```bash
+# Enter the repository
 cd repository
 ```
 
+> Cloning automatically sets up the `origin` remote.
+
 ---
 
-## Push & Pull
+## Push, Pull & Fetch
+
+```text
+             git push  ────────►
+ Local Repo                         GitHub (origin)
+             ◄────────  git pull / git fetch
+```
 
 ### Push
 
-> Upload local commits to GitHub:
+Upload local commits to GitHub:
 
 ```bash
-git push origin main
-```
-
-> First push + set upstream:
-
-```bash
+# First push of a branch: -u links local main to origin/main
 git push -u origin main
+
+# After that, just
+git push
 ```
 
 ### Pull
 
-> Download and merge latest changes:
+Download the latest changes **and merge** them into your current branch:
 
 ```bash
 git pull origin main
+
+# or, if upstream is already set
+git pull
 ```
 
----
+### Fetch
 
-## Fetch
-
-> Download remote changes without merging:
+Download remote changes **without** merging, so you can look before you merge:
 
 ```bash
-git fetch
-```
-
-> Fetch from origin:
-
-```bash
+# Fetch from origin
 git fetch origin
+
+# See what changed on GitHub compared to your branch
+git log --oneline main..origin/main
+
+# Merge when ready
+git merge origin/main
 ```
 
-> **fetch** = download changes
+> **fetch** = download changes only\
 > **pull** = fetch + merge
 
-Woekflow
+> **Error "rejected – fetch first":** someone pushed before you. Run `git pull`, fix any conflicts, then `git push` again.
+
+### Daily Workflow
+
 ```bash
-# 1. Always start by downloading latest code
+# 1. Always start by downloading the latest code
 git pull
 
-# 2. Make your changes in text editor...
+# 2. Make your changes in the editor...
 
 # 3. Check what changed
 git status
@@ -641,370 +1017,215 @@ git commit -m "Describe what you changed"
 # 6. Upload to GitHub
 git push
 ```
+
 ---
 
 ## Remote Branches
-> Pushing a Branch to GitHub
+
+**Push a branch to GitHub:**
+
 ```bash
 # Nobita creates a feature branch locally
-git checkout -b feature-login
+git switch -c feature-login
+
 # Makes changes and commits
 git add login.txt
 git commit -m "Add login page"
-# Push branch to GitHub
+
+# Pushes the branch to GitHub
 git push -u origin feature-login
 ```
 
-> View all branches
+**View branches:**
+
 ```bash
-# See local branches only
+# Local branches only
 git branch
-# See all branches (local + remote)
+
+# Remote branches only
+git branch -r
+
+# All branches (local + remote)
 git branch -a
 ```
 
-> Checking Out Remote Branches
+**Check out someone else's remote branch:**
+
 ```bash
 # Suneo wants to see Nobita's feature branch
 git fetch origin
-git checkout feature-login
+git switch feature-login     # creates a local branch tracking origin/feature-login
 ```
 
-> Deleting Remote Branches
+**Delete branches:**
+
 ```bash
-# Delete branch from GitHub
+# Delete the branch from GitHub
 git push origin --delete feature-login
-# Delete local branch
+
+# Delete the local branch
 git branch -d feature-login
+
+# Remove local references to branches already deleted on GitHub
+git fetch --prune
 ```
-## Fork
-### Fork a Repository
 
-> Go to the original GitHub repository → click Fork.
+---
 
-```bash
-Gian's Repo
-      ↓
-    Fork
-      ↓
-Nobita's GitHub Repo
+## Fork & Pull Request Workflow
+
+Use this when you want to contribute to a repository that you **do not own** (open source, a classmate's project).
+
+| Remote | Points to | Meaning |
+|---|---|---|
+| `origin` | **Your fork** | YOU — you can push here |
+| `upstream` | **Original repository** | ORIGINAL OWNER — you only pull from here |
+
+### Step 1 — Fork the Repository
+
+On GitHub, open the original repository → click **Fork** (top-right).
+
+```text
+gian-doraemon/school-project   (Gian's original repo)
+              │
+            Fork
+              ▼
+nobita-nobi/school-project     (Nobita's copy on GitHub)
 ```
-### Clone Your Fork
 
-> Clone your fork, not the original repository.
+### Step 2 — Clone Your Fork
+
+Clone **your fork**, not the original repository:
 
 ```bash
 git clone git@github.com:nobita-nobi/school-project.git
 cd school-project
-```
-> Check the remote:
 
-```bash
 git remote -v
-origin  → Your fork
+# origin  git@github.com:nobita-nobi/school-project.git  → your fork
 ```
-### Add Original Repo as Upstream
 
-> Add the original repository as upstream.
+### Step 3 — Add the Original Repo as Upstream
 
 ```bash
 git remote add upstream git@github.com:gian-doraemon/school-project.git
-```
-> Check:
 
-```bash
 git remote -v
-origin    → Your fork
-upstream  → Original repository
-origin vs upstream
-Remote	Meaning
-origin	Your fork
-upstream	Original repository
+# origin    → your fork
+# upstream  → original repository
 ```
-> Remember:
 
-origin   = YOU
-upstream = ORIGINAL OWNER
-### Create a Branch
+### Step 4 — Create a Branch and Make Changes
 
-> Always create a separate branch for your changes.
+Always create a separate branch for your changes — never work directly on `main`.
 
 ```bash
 git switch -c fix-homepage
 
-Make your changes, then:
-
+# Make your changes, then:
 git add homepage.txt
 git commit -m "Fix homepage title"
 ```
 
-### Push to Your Fork
-
-> Push your branch to origin.
+### Step 5 — Push to Your Fork
 
 ```bash
-git push origin fix-homepage
-Your branch
-     |
-     ↓
-  origin
-     |
-     ↓
-Your GitHub Fork
-```
-### Create a Pull Request
-
-> On your GitHub fork:
-> Compare and pull request → Create pull request
-
-> Make sure:
-
-> base repository:
-> gian-doraemon/school-project
-
-> base branch:
-> main
-
-← Pull Request ←
-
-> your fork:
-> nobita-nobi/school-project
-
-> branch:
-```bash
-fix-homepage
-Pull Request Flow
-Your Fork
-fix-homepage
-      |
-      | Pull Request
-      ↓
-Original Repo
-main
-      |
-      ↓
-Review → Approve → Merge
+git push -u origin fix-homepage
 ```
 
-### Review & Merge
-
-> The original owner reviews your Pull Request.
-
-```bash
-Review Code
-     ↓
-Comments / Changes
-     ↓
-Approve
-     ↓
-Merge Pull Request
-
-After merging, your changes become part of the original repository.
+```text
+Local branch fix-homepage  ──push──►  origin (your GitHub fork)
 ```
 
-### Sync Fork with Upstream
+### Step 6 — Create a Pull Request
 
-> After the original repository changes:
+1. Open your fork on GitHub → click **Compare & pull request**.
+2. Check the direction:
+
+| | Repository | Branch |
+|---|---|---|
+| **base** (receives changes) | `gian-doraemon/school-project` | `main` |
+| **compare** (your changes) | `nobita-nobi/school-project` | `fix-homepage` |
+
+3. Write a clear title and description → **Create pull request**.
+
+```text
+Your fork: fix-homepage  ──Pull Request──►  Original repo: main
+```
+
+### Step 7 — Review & Merge
+
+The original owner reviews your Pull Request:
+
+```text
+Review code → Comments / requested changes → Approve → Merge Pull Request
+```
+
+> If changes are requested, just commit and push again to the **same branch** — the Pull Request updates automatically.\
+> After merging, your changes become part of the original repository.
+
+### Step 8 — Sync Your Fork with Upstream
+
+When the original repository gets new commits, update your fork:
 
 ```bash
 git switch main
 git pull upstream main
 git push origin main
 ```
-> Flow:
 
-```bash
-Original Repo
-     ↓
-upstream
-     ↓
-Local main
-     ↓
-origin
-     ↓
-Your Fork
-
-Now your fork is up to date.
-
-Working with Remote Branches
-
-Suppose Suneo has a remote branch:
-
-origin/feature-database
+```text
+Original repo ──► upstream ──► local main ──► origin ──► your fork
 ```
-### Fetch Remote Branches
+
+> **Tip:** You can also click **Sync fork** on your fork's GitHub page.
+
+### Complete Fork Workflow
+
+```text
+FORK → CLONE → ADD UPSTREAM → CREATE BRANCH → MAKE CHANGES → COMMIT
+     → PUSH TO ORIGIN → PULL REQUEST → REVIEW → MERGE → SYNC WITH UPSTREAM
+```
+
+---
+
+## Team Workflow on a Shared Remote Branch
+
+When teammates have **write access** to the same repository, they can share branches directly (no fork needed).
+
+Suppose Suneo pushed a branch `origin/feature-database`:
+
 ```bash
+# 1. Download the latest branches
 git fetch origin
-```
 
-> View remote branches:
-```bash
+# 2. See remote branches
 git branch -r
-```
-Example:
+#   origin/main
+#   origin/feature-database
+#   origin/fix-homepage
 
-> origin/main\
-> origin/feature-database\
-> origin/fix-homepage
-
-### Create Local Branch from Remote Branch
-```bash
+# 3. Create a local branch from the remote branch
 git switch -c feature-database origin/feature-database
 ```
 
-> Now you have a local copy of the remote branch.
-```bash
-Remote Branch
-origin/feature-database
-          ↓
-Local Branch
-feature-database
+```text
+origin/feature-database (remote)  ──►  feature-database (local)
 ```
 
-### Make Changes & Push
-
-Edit the files, then:
 ```bash
+# 4. Nobita edits the files, then pushes back to the same branch
 git add database.txt
 git commit -m "Fix database connection string"
 git push origin feature-database
 ```
-> The changes are pushed back to the same remote branch.
 
-### Another Developer Pulls the Changes
-
-> Suneo can update his local branch:
 ```bash
+# 5. Suneo updates his local copy
 git switch feature-database
 git pull origin feature-database
 ```
 
-### Complete Fork Workflow
-```bash
-FORK
-  ↓
-CLONE
-  ↓
-ADD UPSTREAM
-  ↓
-CREATE BRANCH
-  ↓
-MAKE CHANGES
-  ↓
-COMMIT
-  ↓
-PUSH → ORIGIN
-  ↓
-PULL REQUEST
-  ↓
-REVIEW
-  ↓
-MERGE
-  ↓
-SYNC WITH UPSTREAM
-```
-
-
-
-## Stash
-
-> Temporarily save uncommitted changes:
-
-```bash
-git stash
-```
-
-> See stashes:
-
-```bash
-git stash list
-```
-
-> Restore latest stash:
-
-```bash
-git stash pop
-```
-
-> Apply stash without removing it:
-
-```bash
-git stash apply
-```
-
-> Delete latest stash:
-
-```bash
-git stash drop
-```
-> WorkFlow
-```bash
-# Nobita is working on feature
-# Edits login.txt but not ready to commit
-
-# Urgent bug needs fixing!
-# Stash current work
-git stash
-
-# Switch to main branch
-git checkout main
-
-# Fix the bug
-git add bugfix.txt
-git commit -m "Fix urgent bug"
-git push
-
-# Go back to feature branch
-git checkout feature-login
-
-# Bring back stashed work
-git stash pop
-
-# Continue working on feature
-```
----
-## Git Rebase
-> Rebase vs Merge
-```bash
-MERGE:
-main:    A --- B --- C --- M (merge commit)
-              \           /
-feature:       D ------- E
-
-REBASE:
-main:    A --- B --- C
-                         \
-feature:                  D' --- E'
-(commits moved to end of main)
-```
-> Never rebase commits that have been pushed to GitHub and shared with others. Only rebase local commits.
-```bash
-# Nobita's feature branch is behind main
-git checkout feature-login
-
-# Update with latest main
-git rebase main
-
-# Now feature branch has latest main changes
-# And commits are in a clean line
-```
-## Tags
-
-> Create tag:
-
-    git tag v1.0
-
-> List tags:
-
-    git tag
-
-> Push tag:
-
-    git push origin v1.0
-
-> Push all tags:
-
-    git push origin --tags
 ---
 
 ## Basic GitHub Workflow
@@ -1027,22 +1248,6 @@ git push -u origin feature-name
 > Then create a **Pull Request** on GitHub.
 
 ---
-
-## Quick Git Workflow
-
-```bash
-git status
-git add .
-git commit -m "message"
-git push
-```
-
-> **Edit → Add → Commit → Push**
----
-
 ### Author
-
-**MUHAMMAD SHEHZAD**\
-GitHub: https://github.com/dbdmlabs
-
----
+- Author: __MUHAMMAD SHEHZAD__
+- GitHub: https://github.com/dbdmlabs
