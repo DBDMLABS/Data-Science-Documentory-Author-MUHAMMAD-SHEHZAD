@@ -1,30 +1,45 @@
 # Git and GitHub
 
----
+> Used by data scientists to **track versions** of code, notebooks and experiments, and to **collaborate** on the same ML project.
 
-Used by developers to **control versions** and collaborate on the same project.
+| | Git | GitHub |
+|---|---|---|
+| **What** | A **version control system** (software) | A **website** that hosts Git repositories online |
+| **Where** | Runs on your computer | Runs in the cloud (https://github.com) |
+| **Works offline?** | Yes | No |
+| **Used for** | Saving snapshots (commits), branching, undoing changes | Backup, sharing, teamwork, Pull Requests, portfolio |
+
+> **Remember:** Git is the tool, GitHub is the place where you store and share Git projects.
+
+> **Example project used in these notes:** `house-price-prediction` — an ML project with data cleaning, EDA, feature engineering, model training and evaluation. **Shehzad** and **Athar** work on it together.
 
 ## Table of Contents
 
 - [Git and GitHub](#git-and-github)
   - [Table of Contents](#table-of-contents)
-  - [Git Commands](#git-commands)
-    - [Setup](#setup)
+  - [Important Terms](#important-terms)
+  - [Setup](#setup)
+    - [Check Git Version](#check-git-version)
     - [Configure User Details](#configure-user-details)
+    - [Connect to GitHub with SSH](#connect-to-github-with-ssh)
+  - [Initialize Repository](#initialize-repository)
   - [Git 3-Stage Workflow](#git-3-stage-workflow)
+    - [Check Status](#check-status)
     - [Add to Staging](#add-to-staging)
     - [Commit](#commit)
-  - [Initialize Repository](#initialize-repository)
   - [See Changes \& History](#see-changes--history)
   - [.gitignore \& .gitkeep](#gitignore--gitkeep)
     - [.gitignore](#gitignore)
+    - [.gitignore for Data Science Projects](#gitignore-for-data-science-projects)
     - [.gitkeep](#gitkeep)
+  - [Remove \& Rename Files](#remove--rename-files)
   - [Unstaging \& Restore](#unstaging--restore)
   - [Undo Commits](#undo-commits)
-    - [Soft Reset](#soft-reset)
-    - [Mixed Reset](#mixed-reset)
-    - [Hard Reset](#hard-reset)
-  - [Revert Commit](#revert-commit)
+    - [Amend the Last Commit](#amend-the-last-commit)
+    - [Reset (Soft, Mixed, Hard)](#reset-soft-mixed-hard)
+    - [Revert Commit](#revert-commit)
+    - [Recover Lost Commits (Reflog)](#recover-lost-commits-reflog)
+    - [Which Undo to Use](#which-undo-to-use)
   - [Branching](#branching)
   - [Merging Branches](#merging-branches)
     - [Fast-Forward Merge](#fast-forward-merge)
@@ -32,42 +47,42 @@ Used by developers to **control versions** and collaborate on the same project.
     - [Squash Merge](#squash-merge)
     - [Octopus Merge](#octopus-merge)
   - [Merge Conflicts](#merge-conflicts)
-  - [Remote Repository](#remote-repository)
-  - [Clone Repository](#clone-repository)
-  - [Push \& Pull](#push--pull)
-    - [Push](#push)
-    - [Pull](#pull)
-  - [Fetch](#fetch)
-  - [Remote Branches](#remote-branches)
-  - [Fork](#fork)
-    - [Fork a Repository](#fork-a-repository)
-    - [Clone Your Fork](#clone-your-fork)
-    - [Add Original Repo as Upstream](#add-original-repo-as-upstream)
-    - [Create a Branch](#create-a-branch)
-    - [Push to Your Fork](#push-to-your-fork)
-    - [Create a Pull Request](#create-a-pull-request)
-    - [Review \& Merge](#review--merge)
-    - [Sync Fork with Upstream](#sync-fork-with-upstream)
-    - [Fetch Remote Branches](#fetch-remote-branches)
-    - [Create Local Branch from Remote Branch](#create-local-branch-from-remote-branch)
-    - [Make Changes \& Push](#make-changes--push)
-    - [Another Developer Pulls the Changes](#another-developer-pulls-the-changes)
-    - [Complete Fork Workflow](#complete-fork-workflow)
   - [Stash](#stash)
   - [Git Rebase](#git-rebase)
+  - [Cherry-Pick](#cherry-pick)
   - [Tags](#tags)
-  - [Basic GitHub Workflow](#basic-github-workflow)
-  - [Quick Git Workflow](#quick-git-workflow)
+  - [Remote Repository](#remote-repository)
+  - [Clone Repository](#clone-repository)
+  - [Push, Pull \& Fetch](#push-pull--fetch)
+    - [Daily Workflow](#daily-workflow)
+  - [Remote Branches](#remote-branches)
+  - [Fork \& Pull Request Workflow](#fork--pull-request-workflow)
+  - [Team Workflow on a Shared Remote Branch](#team-workflow-on-a-shared-remote-branch)
     - [Author](#author)
-
 
 ---
 
-## Git Commands
+## Important Terms
 
-### Setup
+| Term | Meaning |
+|---|---|
+| **Repository (repo)** | A project folder tracked by Git (contains a hidden `.git` folder) |
+| **Commit** | A saved snapshot of your files with a message |
+| **Staging area** | A waiting area where you choose which changes go into the next commit |
+| **Branch** | An independent line of work (e.g. `main`, `feature-engineering`) |
+| **HEAD** | Pointer to the commit/branch you are currently on |
+| **Merge** | Combine changes from one branch into another |
+| **Remote** | A copy of the repo somewhere else, usually GitHub (`origin`) |
+| **Clone** | Download a full copy of a remote repo |
+| **Push / Pull** | Upload / download commits to / from the remote |
+| **Fork** | Your own copy of someone else's GitHub repo |
+| **Pull Request (PR)** | A request to merge your branch into another repo/branch |
 
-> Check Git version:
+---
+
+## Setup
+
+### Check Git Version
 
 ```bash
 git --version
@@ -75,111 +90,116 @@ git --version
 
 ### Configure User Details
 
-```bash
-git config --global user.name "User Name"
-git config --global user.email "user@email.com"
-```
-
-> Check configuration:
+Your name and email are attached to every commit you make.
 
 ```bash
+git config --global user.name "Muhammad Shehzad"
+git config --global user.email "shehzad@email.com"
+
+# Check configuration
 git config --list
 ```
 
----
+> Use the **same email** as your GitHub account so commits are linked to your profile.
 
-## Git 3-Stage Workflow
+### Connect to GitHub with SSH
 
-**Working Directory → Staging Area → Repository**
+SSH lets you push and pull without typing a password every time. Run these in **Git Bash**:
 
-> Check status:
+- **Inside VS Code:** open the terminal with `` Ctrl + ` ``, click the **⌄** next to **+**, choose **Git Bash**.
+- **On its own:** press the Windows key, type **Git Bash**, open it.
 
-```bash
-git status
-```
+> The default VS Code terminal on Windows is **PowerShell**. `eval` and `clip <` won't work there.
 
-### Add to Staging
-
-> Specific file:
-
-```bash
-git add file_name.txt
-```
-
-> All files:
-
-```bash
-git add .
-```
-
-> Multiple files:
-
-```bash
-git add file1.txt file2.txt
-```
-
-> Check status again:
-
-```bash
-git status
-```
-
-### Commit
-
-> Specific staged changes:
-
-```bash
-git commit -m "Your message"
-```
+| # | Step | Command / Action |
+|---|------|------------------|
+| 1 | Check for existing keys | `ls ~/.ssh` |
+| 2 | Generate a new key | `ssh-keygen -t ed25519 -C "your_email@example.com"` *(press Enter ×3)* |
+| 3 | Start the SSH agent | `eval "$(ssh-agent -s)"` |
+| 4 | Add the key to the agent | `ssh-add ~/.ssh/id_ed25519` |
+| 5 | Copy the public key | `clip < ~/.ssh/id_ed25519.pub` |
+| 6 | Add the key to GitHub | GitHub → **Settings** → **SSH and GPG keys** → **New SSH key** → Paste → **Add** |
+| 7 | Test the connection | `ssh -T git@github.com` *(type `yes` the first time)* |
+| 8 | Clone with SSH | `git clone git@github.com:USERNAME/REPO.git` |
+| 9 | Switch a repo to SSH | `git remote set-url origin git@github.com:USERNAME/REPO.git` |
 
 ---
 
 ## Initialize Repository
 
-> Create folder:
+Turn a normal folder into a Git repository:
 
 ```bash
-mkdir dbdm-project
+mkdir house-price-prediction
+cd house-price-prediction
+git init          # creates a hidden .git folder
 ```
 
-> Enter folder:
+> **Warning:** Never delete the `.git` folder — it contains the entire history of your project.
+
+---
+
+## Git 3-Stage Workflow
+
+```text
+ Working Directory ──►  Staging Area ──►  Repository
+```
+
+| Stage | Meaning |
+|---|---|
+| **Working Directory** | Files you are editing right now |
+| **Staging Area** | Changes selected for the next commit |
+| **Repository** | Permanently saved commits |
+
+### Check Status
 
 ```bash
-cd dbdm-project
+git status
 ```
 
-> Initialize Git:
+| Status | Meaning |
+|---|---|
+| **Untracked** | New file, Git is not tracking it yet |
+| **Modified** | Tracked file changed but not staged |
+| **Staged** | Ready to be committed |
+
+### Add to Staging
 
 ```bash
-git init
+git add clean_data.py                 # one file
+git add clean_data.py train_model.py  # several files
+git add .                             # everything in this folder (and subfolders)
+git add *.py                          # all files of one type
 ```
+
+### Commit
+
+```bash
+# Commit staged changes with a message
+git commit -m "data cleaned"
+
+# Stage all TRACKED modified files and commit in one step
+git commit -am "Handle missing values in price column"
+```
+
+> **Note:** `-am` does not include **new (untracked)** files. Use `git add .` for those.
+
+> **Commit message rules:** start with a verb (Add, Fix, Update, Remove), keep it short (≤ 50 characters), and describe **what** changed — e.g. `Add Random Forest baseline model`.
 
 ---
 
 ## See Changes & History
 
-> See changes:
-
 ```bash
-git diff
-```
-
-> Commit history:
-
-```bash
-git log
-```
-
-> Compact history:
-
-```bash
-git log --oneline
-```
-
-> See branches with commits:
-
-```bash
-git log --oneline --all --graph
+git diff                              # changes not yet staged
+git diff --staged                     # changes that will go into the next commit
+git log                               # full history (press q to quit)
+git log --oneline                     # one line per commit
+git log --oneline --all --graph       # all branches as a graph
+git log --oneline -5                  # last 5 commits
+git log --oneline -- train_model.py   # history of one file
+git show commit_code                  # details of one commit
+git blame train_model.py              # who changed each line
 ```
 
 ---
@@ -188,861 +208,640 @@ git log --oneline --all --graph
 
 ### .gitignore
 
-> Create a file named:
+A file named `.gitignore` tells Git which files and folders to **ignore** (never track).
 
 ```text
-.gitignore
+config.yaml        # one file
+data/raw/          # a whole folder
+*.log              # all .log files
+temp*              # all files starting with temp
+!important.log     # exception: DO track this file
 ```
-
-> Examples:
-
-```text
-file_name.txt
-folder/
-*.log
-temp*
-!important.log
-```
-
-> Add `.gitignore`:
 
 ```bash
 git add .gitignore
+git commit -m "Add .gitignore"
 ```
+
+> **Important:** `.gitignore` only affects **untracked** files. If a file is already tracked, stop tracking it with `git rm --cached file_name`.
+
+### .gitignore for Data Science Projects
+
+```text
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Secrets (NEVER push these)
+.env
+*.key
+
+# Large data and trained models
+data/raw/
+*.csv
+*.zip
+*.pkl
+*.joblib
+*.h5
+
+# Experiment logs
+mlruns/
+wandb/
+
+# Editor / OS files
+.vscode/
+.DS_Store
+Thumbs.db
+```
+
+> **Tip:** GitHub provides ready-made templates: https://github.com/github/gitignore
 
 ### .gitkeep
 
-> `.gitkeep` is used to keep an empty folder in Git.
+Git does **not** track empty folders. Put an empty `.gitkeep` file inside to keep the folder:
 
 ```bash
-mkdir uploads
-touch uploads/.gitkeep
-git add uploads/.gitkeep
+mkdir models
+touch models/.gitkeep
+git add models/.gitkeep
+```
+
+> `.gitkeep` is not a special Git feature — it is just a common name for an empty placeholder file.
+
+---
+
+## Remove & Rename Files
+
+```bash
+git rm old_notebook.ipynb              # delete a file and stage the deletion
+git rm --cached house_prices.csv       # stop tracking, keep the file on your computer
+git mv model.py train_model.py         # rename or move a file
 ```
 
 ---
 
 ## Unstaging & Restore
 
-> Remove specific file from staging:
-
 ```bash
-git restore --staged file_name.txt
+git restore --staged train_model.py               # unstage one file (keeps your edits)
+git restore --staged .                            # unstage everything
+git restore train_model.py                        # discard edits, go back to last commit
+git restore --source commit_code train_model.py   # restore a file from a specific commit
 ```
 
-> Remove all files from staging:
-
-```bash
-git restore --staged .
-```
-
-> Discard changes in a file and restore last committed version:
-
-```bash
-git restore file_name.txt
-```
-
-> **Warning:** This permanently discards the uncommitted changes in that file.
+> **Warning:** `git restore file_name` permanently discards the uncommitted changes in that file.
 
 ---
 
 ## Undo Commits
 
-### Soft Reset
-
-> Undo last commit and keep changes **staged**:
+### Amend the Last Commit
 
 ```bash
-git reset --soft HEAD~1
+# Change the last commit message
+git commit --amend -m "Add XGBoost model"
+
+# Add a forgotten file to the last commit
+git add requirements.txt
+git commit --amend --no-edit
 ```
 
-### Mixed Reset
+> Only amend commits that you have **not pushed** yet.
 
-> Undo last commit and keep changes **unstaged**:
+### Reset (Soft, Mixed, Hard)
+
+`git reset` moves the branch back to an earlier commit. `HEAD~1` means "one commit before the current one".
 
 ```bash
-git reset HEAD~1
+git reset --soft HEAD~1    # undo last commit, keep changes staged
+git reset HEAD~1           # undo last commit, keep changes unstaged (mixed)
+git reset --hard HEAD~1    # undo last commit and DELETE the changes
+git reset --soft HEAD~3    # undo the last 3 commits
 ```
 
-### Hard Reset
+> **Warning:** `--hard` can permanently delete work. Never reset commits that are already pushed — use `git revert` instead.
 
-> Undo last commit and delete uncommitted changes:
+### Revert Commit
 
-```bash
-git reset --hard HEAD~1
-```
-
-> Hard reset can permanently delete work.
-
----
-
-## Revert Commit
-
-> Safely undo a specific commit by creating a new commit:
+Safely undo a commit by creating a **new** commit that does the opposite (e.g. `A — B — C — C'`, where `C'` undoes `C`). History is not rewritten, so it is safe for pushed commits.
 
 ```bash
+git log --oneline          # find the commit code
 git revert commit_code
 ```
 
-> To see commit code:
+### Recover Lost Commits (Reflog)
+
+Git remembers everywhere `HEAD` has been, even after a hard reset.
 
 ```bash
-git log --oneline
+git reflog                 # history of HEAD movements
+git reset --hard HEAD@{2}  # go back to a lost commit
 ```
+
+### Which Undo to Use
+
+| Situation | Command |
+|---|---|
+| Unstage a file | `git restore --staged file` |
+| Discard edits in a file | `git restore file` |
+| Fix the last commit message | `git commit --amend -m "..."` |
+| Undo last commit (not pushed), keep work | `git reset --soft HEAD~1` |
+| Undo a commit that is already pushed | `git revert commit_code` |
+| Throw away all local changes | `git reset --hard` |
+| Recover after a mistake | `git reflog` |
 
 ---
 
 ## Branching
 
-> Create branch:
+A branch lets you try an idea (new feature, new model) without affecting `main`.
 
-```bash
-git branch branch_name
+```text
+main:                  A --- B --- C
+                                    \
+feature-engineering:                 D --- E
 ```
 
-> Switch branch:
-
 ```bash
-git switch branch_name
+git branch                           # list branches (* = current)
+git branch feature-engineering       # create a branch
+git switch feature-engineering       # switch to it
+git switch -c train-random-forest    # create + switch in one step
+git switch main                      # back to main
+git branch -m tune-hyperparameters   # rename the current branch
+git branch -d feature-engineering    # delete a merged branch
+git branch -D train-random-forest    # force delete an unmerged branch
 ```
 
-> Create + switch:
+> **Note:** `git checkout branch_name` and `git checkout -b branch_name` are older commands that do the same as `git switch` / `git switch -c`.
 
-```bash
-git switch -c branch_name
-```
+> **Good branch names for ML projects:** `data-cleaning`, `eda-notebook`, `feature-engineering`, `train-xgboost`, `tune-hyperparameters`, `fix-data-leakage`.
 
-> Check branches:
-
-```bash
-git branch
-```
-
-> Switch to main:
-
-```bash
-git switch main
-```
-
-> Delete branch:
-
-```bash
-git branch -d branch_name
-```
-
-> Force delete:
-
-```bash
-git branch -D branch_name
-```
 ---
 
 ## Merging Branches
 
-> Switch to the branch that will receive changes:
-
 ```bash
-git switch main
+git switch main                    # 1. go to the branch that RECEIVES the changes
+git merge feature-engineering      # 2. merge the other branch into it
 ```
 
-> Merge another branch:
-
-```bash
-git merge branch_name
-```
+| Type | When it happens | Merge commit? |
+|---|---|---|
+| **Fast-forward** | `main` has no new commits since the branch was created | No |
+| **Three-way** | Both branches have new commits | Yes |
+| **Squash** | You want all branch commits as **one** commit | No (one normal commit) |
+| **Octopus** | Merging 3+ branches at once | Yes (with many parents) |
 
 ### Fast-Forward Merge
 
-> Main has no new commit since the branch was created.
+`main` has no new commits, so Git just moves `main` forward to the branch's last commit.
 
-```text
-main ───────────────►
-       \
-        feature ────►
-```
-> Practice
-
-``` bash
-# Step 1: Create and switch to feature branch
-git switch -c feature
-
-# Step 2: Create a new file and commit
-echo "Feature Code" > feature.txt
+```bash
+git switch -c data-cleaning
+echo "df = df.dropna()" > clean_data.py
 git add .
-git commit -m "added feature file"
+git commit -m "Add data cleaning script"
 
-# Step 3: Switch back to main
 git switch main
-
-# Step 4: Merge
-git merge feature
+git merge data-cleaning            # fast-forward, no merge commit
 ```
+
 ### Three-Way Merge
 
-> Both branches have new commits.
+Both branches have new commits, so Git creates a **merge commit** `M` that joins them.
 
 ```text
-        feature ───►
-       /
-main ──●───────────►
-       \
-        changes ───►
+main:             A --- B --- E --- M
+                         \         /
+eda-notebook:             C --- D
 ```
 
-> Practice
-
-``` bash
-# Step 1: Create login-feature branch
-git switch -c login-feature
-
-# Step 2: Add a file on the feature branch
-echo "Login Feature" > login.txt
+```bash
+# Shehzad works on EDA in a branch
+git switch -c eda-notebook
+echo "df.describe()" > eda.py
 git add .
-git commit -m "added login"
+git commit -m "Add EDA summary statistics"
 
-# Step 3: Switch back to main and add a different file
+# Meanwhile main gets a different commit
 git switch main
-echo "Main Update" > main.txt
+echo "pandas" > requirements.txt
 git add .
-git commit -m "main updated"
+git commit -m "Add requirements.txt"
 
-# Step 4: Merge with -m to avoid Vim editor
-git merge login-feature -m "three way merge completed"
+# Merge (-m gives the merge commit a message, so no editor opens)
+git merge eda-notebook -m "Merge eda-notebook into main"
 ```
-
-> Git creates a **merge commit**.
 
 ### Squash Merge
 
-> Combines feature commits into one commit.
+Combines all commits of a branch into **one** new commit on `main`. Keeps `main` history clean — useful when a branch has many small "try this" commits.
 
 ```bash
-Feature branch before squash:
+git switch -c train-model
 
-ui-feature:   A --- B --- C --- D --- E
-                    (navbar) (footer) (sidebar)
+echo "split data" > split_data.py
+git add . && git commit -m "Add train/test split"
 
-After squash merge onto main:
+echo "fit model" > train_model.py
+git add . && git commit -m "Add model training"
 
-main:         A --- B --- F
-                          |
-                    (UI Feature Complete)
-                    All 3 commits combined into one
-```
-> Practice
-```bash
-# Step 1: Create ui-feature branch
-git switch -c ui-feature
+echo "rmse, r2" > evaluate.py
+git add . && git commit -m "Add evaluation metrics"
 
-# Step 2: Make multiple commits
-echo "Navbar" > navbar.txt
-git add .
-git commit -m "navbar added"
-
-echo "Footer" > footer.txt
-git add .
-git commit -m "footer added"
-
-echo "Sidebar" > sidebar.txt
-git add .
-git commit -m "sidebar added"
-
-# Step 3: Switch to main
 git switch main
+git merge --squash train-model     # stages all changes, does NOT commit yet
+git commit -m "Add model training pipeline (split, train, evaluate)"
 
-# Step 4: Squash merge (stages all changes but does NOT commit yet)
-git merge --squash ui-feature
+git branch -D train-model          # -D because Git does not see it as merged
 ```
+
 ### Octopus Merge
 
-> Merges multiple branches at once.
+Merges **several** branches at once into one merge commit (e.g. three independent experiments).
 
 ```bash
-Before octopus merge:
+git switch -c model-linear
+echo "LinearRegression" > linear.py
+git add . && git commit -m "Add linear regression model"
 
-feature-a:   A --- X
-feature-b:   A --- Y
-feature-c:   A --- Z
+git switch main
+git switch -c model-random-forest
+echo "RandomForestRegressor" > random_forest.py
+git add . && git commit -m "Add random forest model"
 
-After octopus merge:
+git switch main
+git switch -c model-xgboost
+echo "XGBRegressor" > xgboost_model.py
+git add . && git commit -m "Add XGBoost model"
 
-             X
-            / \
-main:  A---+   M  (one merge commit, 3 parents)
-            \ /|
-             Y |
-              \|
-               Z
+git switch main
+git merge model-linear model-random-forest model-xgboost -m "Merge all model experiments"
 ```
->Practice
-```bash
-# Branch 1: feature-a
-git switch -c feature-a
-echo "A Feature" > a.txt
-git add .
-git commit -m "feature a"
 
-# Branch 2: feature-b
-git switch main
-git switch -c feature-b
-echo "B Feature" > b.txt
-git add .
-git commit -m "feature b"
+> **Note:** An octopus merge stops if there is any conflict. Then merge the branches one by one.
 
-# Branch 3: feature-c
-git switch main
-git switch -c feature-c
-echo "C Feature" > c.txt
-git add .
-git commit -m "feature c"
-
-# Switch to main and merge all three at once
-git switch main
-git merge feature-a feature-b feature-c -m "octopus merge all features"
-```
 ---
 
 ## Merge Conflicts
 
-> Check conflict:
+A **conflict** happens when two branches change the **same lines** of the same file. Git cannot decide which version to keep, so you choose.
 
 ```bash
-git status
+git status       # shows which files have conflicts
 ```
 
-> Open the conflicted file and choose the required changes.
+Git marks the conflict inside the file like this:
 
 ```text
 <<<<<<< HEAD
-Current branch
+model = LinearRegression()
 =======
-Incoming branch
->>>>>>> branch_name
+model = RandomForestRegressor()
+>>>>>>> try-random-forest
 ```
 
-> After fixing:
+**Resolve it:**
+1. Keep the line you want (one side, the other, or a mix).
+2. Delete the markers `<<<<<<<`, `=======`, `>>>>>>>`.
+3. Save the file, then:
 
 ```bash
 git add .
-git commit -m "Resolve merge conflict"
-```
+git commit -m "Resolve model conflict"
 
-> Abort merge:
-
-```bash
+# Or cancel the merge completely
 git merge --abort
 ```
+
+> **Tip:** VS Code shows buttons above each conflict: **Accept Current**, **Accept Incoming**, **Accept Both**, **Compare**.
+
+> Practice (create a conflict on purpose)
+
+```bash
+echo "model = LinearRegression()" > train_model.py
+git add . && git commit -m "Add linear model"
+
+git switch -c try-random-forest
+echo "model = RandomForestRegressor()" > train_model.py
+git commit -am "Try random forest"
+
+git switch main
+echo "model = Ridge()" > train_model.py
+git commit -am "Try ridge regression"
+
+git merge try-random-forest   # CONFLICT in train_model.py
+```
+
+---
+
+## Stash
+
+**Stash** temporarily saves uncommitted changes so you can switch branches with a clean working directory.
+
+```bash
+git stash                                          # save uncommitted changes
+git stash push -u -m "half-done feature scaling"   # with a message, include untracked files
+git stash list                                     # see all stashes
+git stash pop                                      # restore latest and remove it from the list
+git stash apply                                    # restore latest, keep it in the list
+git stash apply stash@{1}                          # restore a specific stash
+git stash drop                                     # delete the latest stash
+git stash clear                                    # delete all stashes
+```
+
+> Workflow
+
+```bash
+# Athar is half-way through feature engineering — not ready to commit
+git stash
+
+# Urgent: the training script crashes on main
+git switch main
+git add train_model.py
+git commit -m "Fix crash on missing target column"
+git push
+
+# Back to the feature work
+git switch feature-engineering
+git stash pop
+```
+
+---
+
+## Git Rebase
+
+**Rebase** moves your branch's commits so they start from the **latest** commit of another branch. The result is a straight history with no merge commit.
+
+```text
+Before:   main: A --- B --- C          feature: (from B) D --- E
+Merge:    feature: ... D --- E --- M   (extra merge commit)
+Rebase:   feature: A --- B --- C --- D' --- E'   (straight line)
+```
+
+```bash
+# Athar's feature-engineering branch is behind main
+git switch feature-engineering
+git rebase main
+
+# If there is a conflict: fix the file, then
+git add .
+git rebase --continue
+
+# Or cancel
+git rebase --abort
+```
+
+| Merge | Rebase |
+|---|---|
+| Keeps the full true history | Creates a clean straight-line history |
+| Adds a merge commit | No merge commit |
+| Safe for shared branches | **Only for local / unshared commits** |
+
+> **Golden rule:** Never rebase commits that have been pushed and shared with others.
+
+---
+
+## Cherry-Pick
+
+Copy **one specific commit** from another branch onto the current branch:
+
+```bash
+git log --oneline feature-engineering   # find the commit code
+git switch main
+git cherry-pick commit_code
+```
+
+> Useful when you need just one fix (e.g. a data leakage fix) from a branch, without merging the whole branch.
+
+---
+
+## Tags
+
+Tags mark important commits, usually **releases** or **model versions** (`v1.0`, `model-v2`).
+
+```bash
+git tag v1.0                                   # lightweight tag
+git tag -a v1.0 -m "Baseline model, R2 = 0.82"  # annotated tag (recommended)
+git tag v0.9 commit_code                       # tag an older commit
+git tag                                        # list tags
+git show v1.0                                  # tag details
+git push origin v1.0                           # push one tag
+git push origin --tags                         # push all tags
+git tag -d v1.0                                # delete local tag
+git push origin --delete v1.0                  # delete remote tag
+```
+
+> **Note:** `git push` does **not** push tags automatically.
 
 ---
 
 ## Remote Repository
 
-> Add GitHub remote:
+A **remote** is a link to a repository on GitHub. The default name is `origin`.
 
 ```bash
-git remote add origin https://github.com/username/repository.git
-```
-
-> Check remote:
-
-```bash
-git remote -v
-```
-
-> Rename remote:
-
-```bash
+git remote add origin https://github.com/shehzad/house-price-prediction.git
+git remote -v                                                            # check remotes
+git remote set-url origin git@github.com:shehzad/house-price-prediction.git  # switch to SSH
 git remote rename origin upstream
+git remote remove origin
 ```
 
-> Remove remote:
+**Push an existing local project to a new GitHub repo:**
+1. On GitHub: **New repository** → name it → **do not** add a README → **Create repository**.
+2. In your project folder:
 
 ```bash
-git remote remove origin
+git remote add origin https://github.com/shehzad/house-price-prediction.git
+git branch -M main
+git push -u origin main
 ```
 
 ---
 
 ## Clone Repository
 
-> Download an existing GitHub repository:
+Download a full copy of an existing GitHub repository (all files + history):
 
 ```bash
-git clone https://github.com/username/repository.git
+git clone https://github.com/shehzad/house-price-prediction.git
+git clone https://github.com/shehzad/house-price-prediction.git my-folder   # different folder name
+cd house-price-prediction
 ```
 
-> Enter repository:
-
-```bash
-cd repository
-```
+> Cloning automatically sets up the `origin` remote.
 
 ---
 
-## Push & Pull
+## Push, Pull & Fetch
 
-### Push
-
-> Upload local commits to GitHub:
-
-```bash
-git push origin main
+```text
+             git push  ────────►
+ Local Repo                         GitHub (origin)
+             ◄────────  git pull / git fetch
 ```
 
-> First push + set upstream:
+| Command | What it does |
+|---|---|
+| `git push -u origin main` | First push: upload and link local `main` to `origin/main` |
+| `git push` | Upload commits (after `-u` is set) |
+| `git pull` | Download **and merge** latest changes |
+| `git fetch origin` | Download **without** merging, so you can look first |
 
 ```bash
-git push -u origin main
-```
-
-### Pull
-
-> Download and merge latest changes:
-
-```bash
-git pull origin main
-```
-
----
-
-## Fetch
-
-> Download remote changes without merging:
-
-```bash
-git fetch
-```
-
-> Fetch from origin:
-
-```bash
+# Fetch, check, then merge
 git fetch origin
+git log --oneline main..origin/main   # what's new on GitHub
+git merge origin/main
 ```
 
-> **fetch** = download changes
 > **pull** = fetch + merge
 
-Woekflow
+> **Error "rejected – fetch first":** someone pushed before you. Run `git pull`, fix any conflicts, then `git push` again.
+
+### Daily Workflow
+
 ```bash
-# 1. Always start by downloading latest code
-git pull
-
-# 2. Make your changes in text editor...
-
-# 3. Check what changed
-git status
-
-# 4. Stage all changes
-git add .
-
-# 5. Commit with a message
-git commit -m "Describe what you changed"
-
-# 6. Upload to GitHub
-git push
+git pull                                       # 1. get the latest code
+# 2. edit notebooks / scripts ...
+git status                                     # 3. check what changed
+git add .                                      # 4. stage
+git commit -m "Add cross-validation to training"  # 5. commit
+git push                                       # 6. upload
 ```
+
 ---
 
 ## Remote Branches
-> Pushing a Branch to GitHub
-```bash
-# Nobita creates a feature branch locally
-git checkout -b feature-login
-# Makes changes and commits
-git add login.txt
-git commit -m "Add login page"
-# Push branch to GitHub
-git push -u origin feature-login
-```
 
-> View all branches
 ```bash
-# See local branches only
-git branch
-# See all branches (local + remote)
-git branch -a
-```
+# Shehzad pushes his branch to GitHub
+git switch -c train-xgboost
+git add xgboost_model.py
+git commit -m "Add XGBoost model"
+git push -u origin train-xgboost
 
-> Checking Out Remote Branches
-```bash
-# Suneo wants to see Nobita's feature branch
+# View branches
+git branch        # local
+git branch -r     # remote
+git branch -a     # all
+
+# Athar checks out Shehzad's branch
 git fetch origin
-git checkout feature-login
+git switch train-xgboost      # creates a local branch tracking origin/train-xgboost
+
+# Delete branches
+git push origin --delete train-xgboost   # on GitHub
+git branch -d train-xgboost              # locally
+git fetch --prune                        # clean up refs to branches deleted on GitHub
 ```
 
-> Deleting Remote Branches
-```bash
-# Delete branch from GitHub
-git push origin --delete feature-login
-# Delete local branch
-git branch -d feature-login
+---
+
+## Fork & Pull Request Workflow
+
+Use this when you want to contribute to a repository you **do not own** (open source, a classmate's project).
+
+| Remote | Points to | Meaning |
+|---|---|---|
+| `origin` | **Your fork** | You can push here |
+| `upstream` | **Original repository** | You only pull from here |
+
+```text
+athar/house-price-prediction     (Athar's original repo)   ← upstream
+              │ Fork
+              ▼
+shehzad/house-price-prediction   (Shehzad's copy on GitHub) ← origin
 ```
-## Fork
-### Fork a Repository
 
-> Go to the original GitHub repository → click Fork.
+**1. Fork** — on GitHub, open the original repository → click **Fork** (top-right).
+
+**2. Clone your fork** (not the original):
 
 ```bash
-Gian's Repo
-      ↓
-    Fork
-      ↓
-Nobita's GitHub Repo
+git clone git@github.com:shehzad/house-price-prediction.git
+cd house-price-prediction
 ```
-### Clone Your Fork
 
-> Clone your fork, not the original repository.
-
-```bash
-git clone git@github.com:nobita-nobi/school-project.git
-cd school-project
-```
-> Check the remote:
+**3. Add the original repo as upstream:**
 
 ```bash
+git remote add upstream git@github.com:athar/house-price-prediction.git
 git remote -v
-origin  → Your fork
+# origin    → your fork
+# upstream  → original repository
 ```
-### Add Original Repo as Upstream
 
-> Add the original repository as upstream.
+**4. Create a branch and make changes** — never work directly on `main`:
 
 ```bash
-git remote add upstream git@github.com:gian-doraemon/school-project.git
+git switch -c fix-data-leakage
+git add preprocess.py
+git commit -m "Fit scaler on train set only"
 ```
-> Check:
+
+**5. Push to your fork:**
 
 ```bash
-git remote -v
-origin    → Your fork
-upstream  → Original repository
-origin vs upstream
-Remote	Meaning
-origin	Your fork
-upstream	Original repository
-```
-> Remember:
-
-origin   = YOU
-upstream = ORIGINAL OWNER
-### Create a Branch
-
-> Always create a separate branch for your changes.
-
-```bash
-git switch -c fix-homepage
-
-Make your changes, then:
-
-git add homepage.txt
-git commit -m "Fix homepage title"
+git push -u origin fix-data-leakage
 ```
 
-### Push to Your Fork
+**6. Create a Pull Request** — on your fork click **Compare & pull request**, then check the direction:
 
-> Push your branch to origin.
+| | Repository | Branch |
+|---|---|---|
+| **base** (receives changes) | `athar/house-price-prediction` | `main` |
+| **compare** (your changes) | `shehzad/house-price-prediction` | `fix-data-leakage` |
 
-```bash
-git push origin fix-homepage
-Your branch
-     |
-     ↓
-  origin
-     |
-     ↓
-Your GitHub Fork
-```
-### Create a Pull Request
+**7. Review & merge** — Athar reviews, comments or approves, then merges. If changes are requested, just commit and push again to the **same branch**; the PR updates automatically.
 
-> On your GitHub fork:
-> Compare and pull request → Create pull request
-
-> Make sure:
-
-> base repository:
-> gian-doraemon/school-project
-
-> base branch:
-> main
-
-← Pull Request ←
-
-> your fork:
-> nobita-nobi/school-project
-
-> branch:
-```bash
-fix-homepage
-Pull Request Flow
-Your Fork
-fix-homepage
-      |
-      | Pull Request
-      ↓
-Original Repo
-main
-      |
-      ↓
-Review → Approve → Merge
-```
-
-### Review & Merge
-
-> The original owner reviews your Pull Request.
-
-```bash
-Review Code
-     ↓
-Comments / Changes
-     ↓
-Approve
-     ↓
-Merge Pull Request
-
-After merging, your changes become part of the original repository.
-```
-
-### Sync Fork with Upstream
-
-> After the original repository changes:
+**8. Sync your fork with upstream** when the original gets new commits:
 
 ```bash
 git switch main
 git pull upstream main
 git push origin main
 ```
-> Flow:
+
+> **Tip:** You can also click **Sync fork** on your fork's GitHub page.
+
+> **Full flow:** Fork → Clone → Add upstream → Branch → Commit → Push to origin → Pull Request → Review → Merge → Sync
+
+---
+
+## Team Workflow on a Shared Remote Branch
+
+When teammates have **write access** to the same repository, they share branches directly (no fork needed). Suppose Athar pushed `origin/feature-engineering`:
 
 ```bash
-Original Repo
-     ↓
-upstream
-     ↓
-Local main
-     ↓
-origin
-     ↓
-Your Fork
-
-Now your fork is up to date.
-
-Working with Remote Branches
-
-Suppose Suneo has a remote branch:
-
-origin/feature-database
-```
-### Fetch Remote Branches
-```bash
+# Shehzad: get the branch
 git fetch origin
+git branch -r                     # origin/main, origin/feature-engineering, ...
+git switch -c feature-engineering origin/feature-engineering
+
+# Shehzad: edit and push back to the same branch
+git add features.py
+git commit -m "Add log transform for skewed features"
+git push origin feature-engineering
+
+# Athar: update his local copy
+git switch feature-engineering
+git pull origin feature-engineering
 ```
-
-> View remote branches:
-```bash
-git branch -r
-```
-Example:
-
-> origin/main\
-> origin/feature-database\
-> origin/fix-homepage
-
-### Create Local Branch from Remote Branch
-```bash
-git switch -c feature-database origin/feature-database
-```
-
-> Now you have a local copy of the remote branch.
-```bash
-Remote Branch
-origin/feature-database
-          ↓
-Local Branch
-feature-database
-```
-
-### Make Changes & Push
-
-Edit the files, then:
-```bash
-git add database.txt
-git commit -m "Fix database connection string"
-git push origin feature-database
-```
-> The changes are pushed back to the same remote branch.
-
-### Another Developer Pulls the Changes
-
-> Suneo can update his local branch:
-```bash
-git switch feature-database
-git pull origin feature-database
-```
-
-### Complete Fork Workflow
-```bash
-FORK
-  ↓
-CLONE
-  ↓
-ADD UPSTREAM
-  ↓
-CREATE BRANCH
-  ↓
-MAKE CHANGES
-  ↓
-COMMIT
-  ↓
-PUSH → ORIGIN
-  ↓
-PULL REQUEST
-  ↓
-REVIEW
-  ↓
-MERGE
-  ↓
-SYNC WITH UPSTREAM
-```
-
-
-
-## Stash
-
-> Temporarily save uncommitted changes:
-
-```bash
-git stash
-```
-
-> See stashes:
-
-```bash
-git stash list
-```
-
-> Restore latest stash:
-
-```bash
-git stash pop
-```
-
-> Apply stash without removing it:
-
-```bash
-git stash apply
-```
-
-> Delete latest stash:
-
-```bash
-git stash drop
-```
-> WorkFlow
-```bash
-# Nobita is working on feature
-# Edits login.txt but not ready to commit
-
-# Urgent bug needs fixing!
-# Stash current work
-git stash
-
-# Switch to main branch
-git checkout main
-
-# Fix the bug
-git add bugfix.txt
-git commit -m "Fix urgent bug"
-git push
-
-# Go back to feature branch
-git checkout feature-login
-
-# Bring back stashed work
-git stash pop
-
-# Continue working on feature
-```
----
-## Git Rebase
-> Rebase vs Merge
-```bash
-MERGE:
-main:    A --- B --- C --- M (merge commit)
-              \           /
-feature:       D ------- E
-
-REBASE:
-main:    A --- B --- C
-                         \
-feature:                  D' --- E'
-(commits moved to end of main)
-```
-> Never rebase commits that have been pushed to GitHub and shared with others. Only rebase local commits.
-```bash
-# Nobita's feature branch is behind main
-git checkout feature-login
-
-# Update with latest main
-git rebase main
-
-# Now feature branch has latest main changes
-# And commits are in a clean line
-```
-## Tags
-
-> Create tag:
-
-    git tag v1.0
-
-> List tags:
-
-    git tag
-
-> Push tag:
-
-    git push origin v1.0
-
-> Push all tags:
-
-    git push origin --tags
----
-
-## Basic GitHub Workflow
-
-```bash
-git clone repository-url
-cd repository
-
-git switch -c feature-name
-
-# Make changes
-
-git status
-git add .
-git commit -m "Add feature"
-
-git push -u origin feature-name
-```
-
-> Then create a **Pull Request** on GitHub.
 
 ---
-
-## Quick Git Workflow
-
-```bash
-git status
-git add .
-git commit -m "message"
-git push
-```
-
-> **Edit → Add → Commit → Push**
----
+[**Next Lesson `MiniConda`**](<4 minicoda.md>)
 
 ### Author
-
-**MUHAMMAD SHEHZAD**\
-GitHub: https://github.com/dbdmlabs
-
----
+- **[MUHAMMAD SHEHZAD](https://github.com/dbdmlabs)**

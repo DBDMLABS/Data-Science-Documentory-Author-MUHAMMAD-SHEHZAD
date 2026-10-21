@@ -169,7 +169,7 @@ If you see the versions and a sine wave plot, your setup is complete.
 - [ ] Test notebook runs and shows a plot
 
 ---
+[**Next Lesson `Markdown Language`**](<2 Markdown_Language.md>)
 
 ### Author
-- Author: __MUHAMMAD SHEHZAD__
-- GitHub: https://github.com/dbdmlabs
+- **[MUHAMMAD SHEHZAD](https://github.com/dbdmlabs)**
